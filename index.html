@@ -1,0 +1,904 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; form-action 'none'; base-uri 'none'">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>学术资料整理自测｜33题在线问卷，测你的资料整理类型</title>
+  <meta name="description" content="面向大学生的学术资料整理自测问卷：33道题在线作答，答完即时查看你的资料整理行为剖面、特点说明和可照着做的整理建议，答案只在本地计算。">
+<style>
+:root {
+  font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", system-ui, sans-serif;
+  color: #142e4a;
+  background: #f7faff;
+  --ink: #142e4a;
+  --muted: #4b6177;
+  --blue: #125ca6;
+  --line: #d7e2ef;
+  --paper: #ffffff;
+  --radius: 20px;
+  line-height: 1.6;
+  font-synthesis: none;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; }
+main { flex: 1; }
+.wrap { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
+p, h1, h2 { margin: 0; }
+button, summary { font: inherit; }
+a { color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid #067983; outline-offset: 4px; }
+.skip { position: absolute; z-index: 3; top: -100px; left: 12px; padding: 12px; background: white; }
+.skip:focus { top: 8px; }
+.site-head { border-bottom: 1px solid var(--line); background: #fbfdff; }
+.site-head-inner { min-height: 68px; display: flex; justify-content: space-between; align-items: center; gap: 18px; }
+.site-name { text-decoration: none; font-weight: 750; font-size: 16px; display: flex; align-items: center; gap: 11px; }
+.brand-mark { width: 19px; height: 19px; display: inline-block; border-left: 7px solid #125ca6; border-right: 4px solid #69a9df; transform: skew(-12deg); }
+.edition { color: #355a7f; font-size: 13px; font-weight: 650; }
+.intro { display: grid; grid-template-columns: minmax(0, 1.34fr) minmax(300px, 1fr); align-items: center; gap: 46px 60px; padding: 86px 0 62px; }
+.kicker { font-size: 14px; font-weight: 750; color: var(--blue); margin-bottom: 10px; }
+h1 { font-size: clamp(35px, 5.4vw, 68px); line-height: 1.13; letter-spacing: -.045em; }
+.lead { color: var(--muted); font-size: 17px; line-height: 1.85; max-width: 39em; }
+.intro-copy .lead { margin-top: 22px; max-width: 30em; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 26px; }
+.button { border: 1px solid transparent; min-height: 46px; padding: 10px 18px; border-radius: 9px; font-weight: 700; font-size: 15px; }
+.button.primary { color: white; background: var(--blue); }
+.button.primary:hover { background: #074980; }
+.button.secondary { color: #234766; background: #fff; border-color: #cbdbea; }
+.button.secondary:hover { background: #eaf3ff; }
+.button span { margin-left: 6px; }
+.privacy { color: var(--muted); font-size: 13px; margin-top: 18px; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; background: #187b65; margin-right: 7px; }
+.intro-panel { background: linear-gradient(142deg, #e9f4ff 0%, #d7ebff 100%); border-radius: 26px; border: 1px solid #cce0f7; padding: 32px 34px; }
+.panel-index { color: #315b82; font-weight: 700; font-size: 13px; margin-bottom: 7px; }
+h2 { font-size: 23px; line-height: 1.25; }
+.flow { list-style: none; padding: 0; margin: 16px 0 0; }
+.flow li { display: flex; align-items: flex-start; gap: 15px; padding-block: 13px; }
+.flow li + li { border-top: 1px solid #bcd2e9; }
+.flow-num { color: #125ca6; font-size: 23px; line-height: 1.4; font-weight: 780; font-variant-numeric: tabular-nums; }
+.flow strong { font-size: 16px; }
+.flow p, .muted { color: var(--muted); }
+.flow p { font-size: 13px; margin-top: 1px; }
+.method-note { grid-column: 1 / -1; }
+details { border-top: 1px solid var(--line); }
+summary { color: #234e76; font-size: 15px; padding: 13px 0; cursor: pointer; font-weight: 700; }
+details p { color: var(--muted); max-width: 74em; margin: 0 0 10px; font-size: 14px; }
+.site-foot { border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; margin-top: 32px; padding: 19px 0; }
+.survey { max-width: 840px; margin: auto; padding: 38px 0 14px; }
+.survey-top { display: flex; gap: 16px; align-items: flex-end; justify-content: space-between; }
+.survey h1, .results h1 { font-size: clamp(30px, 4.7vw, 51px); }
+.progress-label { color: var(--muted); font-size: 14px; text-align: right; min-width: 88px; }
+progress { display: block; width: 100%; height: 8px; margin: 17px 0; border: none; border-radius: 10px; background: #dce8f4; accent-color: var(--blue); overflow: hidden; }
+progress::-webkit-progress-bar { background: #dce8f4; }
+progress::-webkit-progress-value { background: var(--blue); }
+progress::-moz-progress-bar { background: var(--blue); }
+.survey-instruction { margin-bottom: 18px; color: var(--muted); }
+.question-list { display: grid; gap: 13px; }
+.question { position: relative; margin: 0; min-width: 0; padding: 16px 15px 17px; border: 1px solid var(--line); border-radius: 13px; background: var(--paper); }
+.question legend { float: left; width: 100%; margin: 0 0 12px; font-weight: 700; font-size: 16px; line-height: 1.55; padding: 0 4px; }
+.question-no { color: var(--blue); margin-right: 8px; font-variant-numeric: tabular-nums; }
+.choices { clear: both; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+.choice { display: flex; min-height: 45px; align-items: center; justify-content: center; gap: 4px; position: relative; padding: 5px 4px; font-size: 13px; text-align: center; color: #314b63; cursor: pointer; }
+.choice input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.choice-text { display: flex; align-items: center; justify-content: center; min-height: 45px; width: 100%; border: 1px solid #d8e4f0; border-radius: 8px; background: #f8fbff; }
+.choice:hover .choice-text { background: #eaf3ff; }
+.choice input:checked + .choice-text { font-weight: 750; border-color: var(--blue); color: #093e74; background: #dceeff; box-shadow: inset 0 0 0 1px var(--blue); }
+.choice input:focus-visible + .choice-text { outline: 3px solid #067983; outline-offset: 2px; }
+.question.invalid { border-color: #b13e2b; }
+.error { margin-top: 13px; color: #992f21; }
+.survey-actions { display: flex; justify-content: space-between; gap: 12px; margin-top: 20px; }
+.results { padding: 50px 0 26px; }
+.result-heading .lead { margin-top: 16px; }
+.results .result-heading h1 { max-width: 24em; font-size: clamp(30px, 4.2vw, 46px); line-height: 1.22; }
+.result-takeaway { max-width: 60em; }
+.result-caution { margin-top: 12px; padding-left: 11px; border-left: 3px solid #b57220; color: #744412; font-size: 14px; }
+.sample-types { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 18px; font-size: 13px; color: var(--muted); }
+.sample-types .button { min-height: 38px; padding: 6px 10px; font-size: 13px; }
+.sample-types .button[aria-pressed="true"] { border-color: var(--blue); background: #e1efff; color: #104777; }
+.result-grid { display: grid; grid-template-columns: minmax(0, 1.13fr) minmax(300px, 1fr); gap: 18px; margin: 26px 0; }
+.result-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 23px; }
+.score-card { background: #eef6ff; }
+.result-description { margin-top: 11px; line-height: 1.75; }
+.profile-features { margin: 11px 0 0; padding-left: 21px; color: var(--muted); }
+.profile-features li + li { margin-top: 5px; }
+.personal-note { margin-top: 9px; font-size: 13px; }
+.personal-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 14px; }
+.personal-table tr { border-bottom: 1px solid #d6e4f3; }
+.personal-table tbody tr:last-child { border-bottom: 0; }
+.personal-table th, .personal-table td { padding: 7px 0 7px 9px; text-align: right; }
+.personal-table th:first-child { padding-left: 0; text-align: left; }
+.personal-table th[scope="row"] { font-weight: 550; }
+.own-score { font-weight: 740; color: var(--blue); font-variant-numeric: tabular-nums; }
+.action-plan { margin: 28px 0 24px; }
+.action-plan > p { margin: 6px 0 13px; font-size: 14px; }
+.plan-list { padding: 0; margin: 0; list-style: none; display: grid; gap: 13px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.plan-card { border: 1px solid var(--line); border-top: 3px solid #2877b9; border-radius: 12px; padding: 17px 16px; background: var(--paper); }
+.plan-time { color: #125ca6; font-size: 13px; font-weight: 700; }
+.plan-card h3 { font-size: 17px; line-height: 1.4; margin: 6px 0 8px; }
+.plan-steps { padding-left: 20px; margin: 0; font-size: 14px; }
+.plan-steps li + li { margin-top: 6px; }
+.plan-example { margin-top: 10px; padding: 8px 10px; color: #39546b; background: #edf5fc; border-radius: 7px; font-size: 13px; }
+.result-scope { margin-top: 10px; font-size: 13px; color: var(--muted); }
+.match-list { display: grid; gap: 12px; margin-top: 15px; }
+.match-row p { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; font-size: 13px; }
+.match-row strong { font-weight: 700; }
+.match-meter { position: relative; height: 6px; border-radius: 10px; background: #d3e2ef; margin-top: 5px; overflow: hidden; }
+.match-meter span { display: block; height: 100%; background: var(--tint); }
+.match-meter .match-interval { position: absolute; top: 0; opacity: .38; }
+.match-note { margin-top: 14px; font-size: 12px; }
+.score-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(148px, 1fr)); gap: 7px; padding-bottom: 12px; }
+.score-list p { background: #edf4fb; padding: 8px 9px; display: flex; justify-content: space-between; gap: 5px; font-size: 12px; border-radius: 6px; margin: 0; }
+.result-actions { margin-top: 20px; }
+@media (max-width: 820px) {
+  .wrap { width: min(680px, calc(100% - 34px)); }
+  .intro { grid-template-columns: 1fr; gap: 24px; padding: 53px 0 24px; }
+  .intro-panel { padding: 22px 25px; }
+  .result-grid { grid-template-columns: 1fr; }
+  .plan-list { grid-template-columns: 1fr; }
+}
+@media (max-width: 470px) {
+  .wrap { width: calc(100% - 26px); }
+  .site-head-inner { min-height: 58px; }
+  .survey { padding-top: 22px; }
+  .question { padding-inline: 8px; }
+  .choices { gap: 3px; }
+  .choice { padding: 2px 0; font-size: 11px; }
+  .choice-text { padding: 2px; }
+  .result-card { padding: 15px; }
+}
+
+</style>
+
+
+
+
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <link rel="canonical" href="https://yaofzu.github.io/academic-material-quiz/">
+  <meta name="theme-color" content="#f7faff">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yaofzu.github.io/academic-material-quiz/">
+  <meta property="og:site_name" content="学术资料整理自测">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:title" content="学术资料整理自测｜33题在线问卷，测你的资料整理类型">
+  <meta property="og:description" content="填写33道题，查看你的资料整理类型和可照着做的建议。">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="学术资料整理自测｜33题在线问卷">
+  <meta name="twitter:description" content="填写33道题，查看你的资料整理类型和可照着做的建议。">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebPage","name":"学术资料整理自测","alternateName":"大学生学术资料使用问卷","description":"面向大学生的33题学术资料整理自测问卷，答完可查看资料整理行为剖面与整理建议。","inLanguage":"zh-CN","url":"https://yaofzu.github.io/academic-material-quiz/","isAccessibleForFree":true,"about":{"@type":"Thing","name":"学术资料整理与研究资料管理"},"audience":{"@type":"EducationalAudience","educationalRole":"student"}}
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">跳到主要内容</a>
+  <header class="site-head">
+    <div class="wrap site-head-inner">
+      <a class="site-name" href="#intro" id="home-link"><span class="brand-mark" aria-hidden="true"></span>学术资料整理自测</a>
+      <span class="edition">研究试用版</span>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <section id="intro" class="intro" aria-labelledby="intro-title">
+      <div class="intro-copy">
+        <p class="kicker">大学生学术资料使用问卷</p>
+        <h1 id="intro-title">你的学术资料<br>是怎么存下来的？</h1>
+        <p class="lead">回想平时保存、查找和整理学习资料的方式。答完后，看看你最接近哪种类型、这类有什么特点，以及可以从哪里开始整理。</p>
+        <div class="actions">
+          <button class="button primary" id="start" type="button">开始试填 <span aria-hidden="true">→</span></button>
+          <button class="button secondary" id="sample" type="button">查看示例结果</button>
+        </div>
+        <p class="privacy"><span class="status-dot" aria-hidden="true"></span>答案在当前页面计算，关闭页面后即清除。</p>
+      </div>
+      <aside class="intro-panel" aria-labelledby="flow-title">
+        <p class="panel-index">问卷流程</p>
+        <h2 id="flow-title">从作答到反馈</h2>
+        <ol class="flow">
+          <li><span class="flow-num">01</span><div><strong>回答 33 道陈述题</strong><p>按实际情况选择同意程度。</p></div></li>
+          <li><span class="flow-num">02</span><div><strong>查看剖面匹配</strong><p>比较十个维度的得分组合。</p></div></li>
+          <li><span class="flow-num">03</span><div><strong>选一条建议试试看</strong><p>从命名、归档或清理资料开始。</p></div></li>
+        </ol>
+      </aside>
+      <details class="method-note">
+        <summary>了解试用版的计分方式</summary>
+        <p>试用版从信息质量和技术促进中分别拟删原第18题和第20题，共33题。各维度按保留题目取均分，结合三类模型给出最接近的剖面。</p>
+        <p>旧数据按题号编码，暂未能确认当时是否删了这两题。建模用的导出记录也存在重复模式。这一版适合体验流程与自我反思，正式发放前需核对题目与模型，并用独立答卷验证。</p>
+      </details>
+    </section>
+
+    <section id="survey" class="survey" aria-labelledby="survey-title" hidden>
+      <div class="survey-top">
+        <div><p class="kicker" id="step-label"></p><h1 id="survey-title" tabindex="-1">填写问卷</h1></div>
+        <p id="progress-label" class="progress-label" aria-live="polite"></p>
+      </div>
+      <progress id="progress" max="33" value="0" aria-label="已答题数"></progress>
+      <p class="survey-instruction">请根据你的实际情况选择，每题选择一项。</p>
+      <form id="survey-form" novalidate>
+        <div id="questions" class="question-list"></div>
+        <p id="form-error" class="error" role="alert" hidden></p>
+        <div class="survey-actions">
+          <button class="button secondary" id="back" type="button">上一页</button>
+          <button class="button primary" id="next" type="submit">下一页 <span aria-hidden="true">→</span></button>
+        </div>
+      </form>
+    </section>
+
+    <section id="result" class="results" aria-labelledby="result-title" hidden>
+      <div class="result-heading">
+        <p class="kicker" id="result-kicker">你的问卷结果</p>
+        <h1 id="result-title" tabindex="-1">剖面匹配结果</h1>
+        <p class="lead result-takeaway" id="result-takeaway"></p>
+        <p id="result-caution" class="result-caution" hidden></p>
+      </div>
+      <div id="sample-types" class="sample-types" role="group" aria-label="切换示例类型" hidden></div>
+      <div class="result-grid">
+        <section class="result-card" aria-labelledby="profile-title">
+          <h2 id="profile-title">这个类型有什么特点</h2>
+          <p id="result-description" class="result-description"></p>
+          <ul id="profile-features" class="profile-features"></ul>
+        </section>
+        <section class="result-card score-card" aria-labelledby="personal-title">
+          <h2 id="personal-title">你的得分与类型参考</h2>
+          <p id="personal-note" class="muted personal-note"></p>
+          <table class="personal-table">
+            <thead><tr><th scope="col">维度</th><th scope="col" id="personal-score-label">你的得分</th><th scope="col" id="reference-label">类型均值</th></tr></thead>
+            <tbody id="personal-scores"></tbody>
+          </table>
+        </section>
+      </div>
+      <section class="action-plan" aria-labelledby="advice-title">
+        <h2 id="advice-title">你的资料整理计划</h2>
+        <p class="muted">先试第一步，一周后用最后一步看看是否更容易找回资料。</p>
+        <ol class="plan-list" id="advice-list"></ol>
+      </section>
+      <details class="result-details">
+        <summary>查看十个维度得分</summary>
+        <div id="dimension-scores" class="score-list"></div>
+      </details>
+      <details class="result-details">
+        <summary>查看与三个剖面的匹配程度</summary>
+        <div id="matches" class="match-list"></div>
+        <p id="match-note" class="muted match-note"></p>
+      </details>
+      <p class="result-scope">探索性试用反馈依据暂定的33题计分。类型均值描述研究中的得分组合，各人的作答可能有差异。</p>
+      <div class="actions result-actions">
+        <button class="button primary" id="restart" type="button">开始新一轮试填</button>
+        <button class="button secondary" id="edit" type="button">返回修改答案</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot"><div class="wrap">学术资料整理自测 · 探索性问卷试用</div></footer>
+<script>
+(() => {
+  'use strict';
+
+  const wording = [
+    '我是拖延和嫌麻烦的性格',
+    '我在生活中缺乏计划性',
+    '我有囤积实物的习惯',
+    '囤积大量的数字信息能给我带来满满的安全感',
+    '我生怕错过重要的资料，因为怕遗漏就会不断存储',
+    '我对保存的数字资源有依赖性，如果删除会感到恐慌烦躁',
+    '学校或者导师安排的学习任务致使我必须大量搜索保存数字资源',
+    '为了解决某一学习任务的难点，我倾向于大量收集数字资源',
+    '浏览到知识类、技能类信息资源，我都会收藏保存以便后续学习',
+    '我认为收藏存储的信息对我来说是有用的',
+    '我认为收藏存储的数字资源能够解决我的学习需求',
+    '我认为收藏存储的数字资源以后可能会用得到',
+    '周围群体的同学或朋友都在关注某信息，我也会进行关注和保存',
+    '在社会内卷环境下，我不想放过任何有竞争性数字资源。',
+    '我不断收集各类电子学习资料，唯恐落下别人有的',
+    '我倾向于收藏或保存稀有、难以获取的信息',
+    '我认为收藏或保存的信息是准确可靠的',
+    '我每天接收的信息太多了，来不及看就会先存着',
+    '我倾向于收藏或保存免费或低成本的数字资源',
+    '电子存储空间越来越大，我不会在意存储的信息占用空间内存',
+    '电子存储成本越来越低，使我更容易存储更多的数字资源',
+    '网盘等云存储平台使得存储形式更加丰富',
+    '电子设备的多样性使存储信息更加方便',
+    '我很了解自身的信息需求并能够明确地表达出来',
+    '我经常组织或整理我搜寻到的数字资源',
+    '我能够精准地识别并剔除与自身需求无关的学术数据',
+    '我认为我有能力使用我保存下来的数字资源',
+    '我认为我将来有时间去使用我保存下来的数字资源',
+    '我认为我将来能充分学习和利用我保存下来的数字资源',
+    '我发现删除旧的或者未使用过的资料非常困难',
+    '如果我删除了某些文件，事后我会感到不安',
+    '我不知道我有多少数字资源',
+    '学术资料太多，我很难准确找到自己想要的某个信息',
+    '我收藏或保存的数字资源很多都没有再看过',
+    '我收藏或保存的数字资源很少分类整理，总是杂乱堆放',
+  ];
+
+  const groups = [
+    ['a', '个性偏好', 1, 3], ['b', '依恋焦虑', 4, 6],
+    ['c', '学术需求', 7, 9], ['d', '感知有用性', 10, 12],
+    ['e', '社会影响', 13, 15], ['f', '信息质量', 16, 19],
+    ['g', '技术促进', 20, 23], ['h', '数据素养', 24, 26],
+    ['i', '自我效能', 27, 29], ['j', '囤积行为', 30, 35],
+  ].map(([id, label, first, last]) => ({
+    id, label, items: Array.from({ length: last - first + 1 }, (_, i) => first + i),
+  }));
+
+  const items = groups.flatMap(group => group.items.map(id => ({
+    id, text: wording[id - 1], group: group.id,
+  })));
+
+  const types = [
+    {
+      id: 'C1', name: '动机与社会影响偏弱型', color: '#0072B2',
+      summary: '这个剖面的学术需求、感知有用性、社会影响和依恋焦虑得分相对较低，囤积行为得分在三个剖面中最低。',
+      advice: [
+        { title: '按当前任务建资料夹', text: '围绕正在做的课程、项目或论文建一两个资料夹。遇到可能有用的资料，可以先保存来源链接，再按需要下载。' },
+        { title: '保留能复用的整理习惯', text: '保存时补上主题或日期，每次任务结束后检查一次，把重要资料移到归档区。' },
+      ],
+    },
+    {
+      id: 'C2', name: '信息质量相对突出型', color: '#00876B',
+      summary: '信息质量是这个剖面内部得分最高的指标，自我效能是组内最低项。囤积行为得分介于另两个剖面之间。',
+      advice: [
+        { title: '给优质资料写一句用途', text: '收藏前记下它能回答哪个问题，或标注下次阅读时要查看的章节。优先留下与手头任务直接相关的材料。' },
+        { title: '每周用掉一条收藏', text: '从最相关的资料中挑一条，留下读书笔记、引用或任务清单。能检索和使用的资料更值得留在手边。' },
+      ],
+    },
+    {
+      id: 'C3', name: '多维高分型', color: '#B74D0B',
+      summary: '这个剖面的学术需求、感知有用性等多项因素同时得分较高，囤积行为得分在三个剖面中最高。',
+      advice: [
+        { title: '分出正在用和待整理', text: '把资料分为当前项目、待处理和归档。每周安排一次短时整理，优先处理重复副本和已经完成的任务。' },
+        { title: '看不准时先归档', text: '对暂时无法决定去留的文件设一个复查日期。需要长期留存的原始数据和重要文件先核实备份及保留要求。' },
+      ],
+    },
+  ];
+
+  // Saved equal_diag K=3 mixture, canonical order a–j and C1–C3. Only fitted
+  // coefficients are included. The 33-item scoring keys for f and g are pending.
+  const model = {
+    weights: [0.08054686851198548, 0.5562865689039201, 0.36316656258409424],
+    means: [
+      [2.2660596217890236, 1.598915912570697, 2.1324020532967323, 1.9327765108685575, 1.4659960260982934, 2.1995226548094364, 2.799342273156733, 2.9999576668569716, 2.5344211282022497, 2.865384212534497],
+      [3.265451719182208, 3.1919590369126674, 3.535950392189915, 3.530063217650566, 3.3833742258526533, 4.037542475143041, 3.4492611180183554, 3.012384954506037, 2.9334396887511707, 3.4128516932893955],
+      [4.414226868921499, 4.27505667307892, 4.310807263867869, 4.37890415129242, 4.2037864967423335, 4.57868747931349, 4.177241498209886, 3.439964768462347, 3.61972985658592, 3.8630670469560093],
+    ],
+    variance: [0.3608502098940332, 0.47238994360359077, 0.5623808353327377, 0.3313970875934874, 0.423294251653467, 0.40014955918511147, 0.702939698562951, 0.9413716941054084, 0.840823292230812, 0.8899663337485734],
+    center: [3.6021505376344076, 3.4569892473118276, 3.704301075268816, 3.7096774193548385, 3.5268817204301075, 4.086021505376344, 3.661290322580646, 3.1666666666666674, 3.1505376344086016, 3.532258064516129],
+    scale: [0.8356713646333529, 1.0304223147999974, 0.8922301781018669, 0.806523294305341, 0.9495299480325303, 0.7918389373877273, 0.7817174720033957, 0.8524684797460688, 0.9268542769681697, 0.8711004810571775],
+  };
+
+  const standardize = values => values.map((value, i) => (value - model.center[i]) / model.scale[i]);
+  const meansZ = model.means.map(standardize);
+
+  function posterior(scores) {
+    if (!Array.isArray(scores) || scores.length !== 10 ||
+        !Array.from(scores).every(score => Number.isFinite(score) && score >= 1 - 1e-10 && score <= 5 + 1e-10)) {
+      throw new TypeError('请提供十个有效的维度均分。');
+    }
+    const scoreZ = standardize(scores);
+    // The Gaussian normalizing term is common across all equal-diagonal classes.
+    const likelihoods = meansZ.map((means, k) => (
+      Math.log(model.weights[k]) - 0.5 * scoreZ.reduce((sum, score, i) => (
+        sum + (score - means[i]) ** 2 / model.variance[i]
+      ), 0)
+    ));
+    const offset = Math.max(...likelihoods);
+    const masses = likelihoods.map(logMass => Math.exp(logMass - offset));
+    const total = masses.reduce((sum, mass) => sum + mass, 0);
+    return masses.map(mass => mass / total);
+  }
+
+  const mean = values => values.reduce((sum, value) => sum + value, 0) / values.length;
+
+  function evaluate(answers) {
+    if (!Array.isArray(answers) || answers.length !== items.length ||
+        !Array.from(answers).every(value => Number.isInteger(value) && value >= 1 && value <= 5)) {
+      throw new TypeError('请完成全部35道题，每道选择1到5分。');
+    }
+    const scoresByGroup = groups.map(group => {
+      const values = group.items.map(id => answers[id - 1]);
+      return group.id === 'f' || group.id === 'g'
+        ? values.map((_, omitted) => mean(values.filter((_, i) => i !== omitted)))
+        : [mean(values)];
+    });
+    const scores = groups.map(({ id, label }, i) => ({
+      id, label, min: Math.min(...scoresByGroup[i]), max: Math.max(...scoresByGroup[i]),
+    }));
+    const rows = [];
+    const wins = types.map(() => 0);
+    for (const f of scoresByGroup[5]) {
+      for (const g of scoresByGroup[6]) {
+        const scenarioScores = scoresByGroup.map(([first]) => first);
+        scenarioScores[5] = f;
+        scenarioScores[6] = g;
+        const probabilities = posterior(scenarioScores);
+        rows.push(probabilities);
+        const best = Math.max(...probabilities);
+        const winners = probabilities.map((probability, i) => best - probability <= 1e-12 ? i : -1)
+          .filter(i => i >= 0);
+        if (winners.length === 1) wins[winners[0]] += 1;
+      }
+    }
+    const probabilities = types.map(({ id }, i) => ({
+      id,
+      min: Math.min(...rows.map(row => row[i])),
+      max: Math.max(...rows.map(row => row[i])),
+      wins: wins[i],
+    }));
+    const top = probabilities.find(p => p.wins === rows.length);
+    return {
+      topType: top?.id ?? null,
+      stable: Boolean(top),
+      // 0.70 is a display rule for this prototype, not a validated cutoff.
+      cautious: !top || top.min < 0.70,
+      scores,
+      probabilities,
+      scenarios: rows.length,
+    };
+  }
+
+  function profileMeans(typeId) {
+    const index = types.findIndex(type => type.id === typeId);
+    if (index < 0) return null;
+    return Object.fromEntries(groups.map(({ id }, dimension) => [id, model.means[index][dimension]]));
+  }
+
+  window.QuizModel = { items, groups, types, evaluate, posterior, profileMeans };
+})();
+
+</script>
+<script>
+(() => {
+  'use strict';
+
+  const source = window.QuizModel;
+  // These are provisional omissions. The retained item keys in the fitted
+  // 33-item export are still unconfirmed.
+  const omittedIds = [18, 20];
+  const items = source.items.filter(item => !omittedIds.includes(item.id))
+    .map((item, index) => ({ ...item, originalId: item.id, id: index + 1 }));
+  const groups = source.groups.map(group => ({
+    ...group,
+    items: items.filter(item => item.group === group.id).map(item => item.id),
+  }));
+
+  function evaluate(answers) {
+    if (!Array.isArray(answers) || answers.length !== items.length ||
+        !Array.from(answers).every(value => Number.isInteger(value) && value >= 1 && value <= 5)) {
+      throw new TypeError('请完成全部33道题，每道选择1到5分。');
+    }
+    const means = groups.map(group => (
+      group.items.reduce((sum, id) => sum + answers[id - 1], 0) / group.items.length
+    ));
+    const scores = groups.map(({ id, label }, index) => ({
+      id, label, min: means[index], max: means[index],
+    }));
+    const posterior = source.posterior(means);
+    const best = Math.max(...posterior);
+    const winnerIndex = posterior.indexOf(best);
+    const probabilities = source.types.map(({ id }, index) => ({
+      id, min: posterior[index], max: posterior[index], wins: Number(index === winnerIndex),
+    }));
+
+    return {
+      topType: source.types[winnerIndex].id,
+      stable: true,
+      // 0.70 is a display convention for the prototype.
+      cautious: best < 0.70,
+      scores,
+      probabilities,
+      scenarios: 1,
+    };
+  }
+
+  window.QuizModel = {
+    ...source, items, groups, evaluate,
+    scoringVersion: { questionCount: 33, omittedOriginalIds: omittedIds, provisional: true },
+  };
+})();
+
+</script>
+<script>
+'use strict';
+
+// Each plan describes a small practice the participant can try and review.
+window.QuizFeedback = {
+  C1: {
+    takeaway: '从正在做的一项任务入手，给常用资料留一个固定位置。',
+    meaning: '这类答卷对“学习任务需要存很多资料”和“保存的资料以后会用到”等陈述的认同相对较低。周围同学的做法和保留资料带来的安全感，在这类剖面中也相对弱。',
+    features: [
+      '学术需求和感知有用性偏低，较少把大量保存资料视为完成任务的必要准备。',
+      '社会影响和依恋焦虑是这类剖面得分最低的两个维度。',
+      '数据素养的剖面均值约3.00分，囤积行为均值为2.87分，在三类中最低。',
+    ],
+    dimensions: ['c', 'd', 'e', 'b', 'h', 'j'],
+    plan: [
+      {
+        when: '今天 · 10分钟',
+        title: '只整理一个当前任务',
+        steps: [
+          '选一门正在上的课或一项近期作业，新建一个与任务同名的文件夹。',
+          '找出最近用到的3份资料，放到这个文件夹里。共享文件可以放快捷方式或来源链接。',
+          '把文件名改成“主题_用途_日期”，方便下次搜索。',
+        ],
+        example: '如“统计作业_回归分析练习_11月”。',
+      },
+      {
+        when: '下次保存时',
+        title: '先写一句用途',
+        steps: [
+          '保存前写一句“我会在____任务中使用它”，或者注明要读的页码。',
+          '马上会用的资料放进任务文件夹。用途还不明确的资料可以先保存来源链接。',
+          '任务完成后，把需要留存的最终稿和关键参考资料一起归档。',
+        ],
+        example: '“给文献综述写数字资料分类时用，先看第4节。”',
+      },
+      {
+        when: '一周后 · 5分钟',
+        title: '用一次查找检查效果',
+        steps: [
+          '从这一周的任务里选一份要再次用的资料，看看能否在1分钟内找到。',
+          '如果翻了多个文件夹才找到，只改一个地方，比如统一文件名里的课程简称。',
+        ],
+        example: '检查时记一句“能找到／还要改哪里”。',
+      },
+    ],
+  },
+  C2: {
+    takeaway: '把对资料质量的重视转成下一步用途，从一篇已经收藏的资料开始。',
+    meaning: '在这类答卷里，信息质量是十个维度中得分最高的一项，自我效能则是组内最低项。换句话说，对所保存资料的质量评价较积极，同时对未来是否有时间、能力充分使用这些资料的把握相对较弱。',
+    features: [
+      '信息质量的剖面均值为4.04分，是这一类内部最突出的维度。',
+      '自我效能的剖面均值为2.93分，相关题目问的是对自己能否利用保存资料的看法。',
+      '囤积行为的剖面均值为3.41分，介于另外两类之间。',
+    ],
+    dimensions: ['f', 'c', 'i', 'j'],
+    plan: [
+      {
+        when: '今天 · 10分钟',
+        title: '从收藏夹选1份要用的资料',
+        steps: [
+          '写下一项真实任务，比如准备课堂汇报或写论文综述。',
+          '从收藏夹选1份最能回答该任务问题的资料，写下“用途、下一步、来源”三项。',
+          '把它放进“本周要用”，或者直接把来源链接贴进任务笔记。',
+        ],
+        example: '“汇报背景｜核对第2页定义｜保留作者、年份和链接。”',
+      },
+      {
+        when: '本周找一次 · 15分钟',
+        title: '把一条收藏变成学习产出',
+        steps: [
+          '打开标记的页码或小节，围绕已写下的问题阅读。',
+          '用自己的话记一条核心观点，再补一条证据或一个引用位置。',
+          '把笔记贴到汇报提纲或论文草稿，用过的资料标记成“已用”。',
+        ],
+        example: '“作者如何区分收藏与囤积？定义见第3页，可放在概念界定。”',
+      },
+      {
+        when: '一周后 · 5分钟',
+        title: '检查手边的待用清单',
+        steps: [
+          '找出至少1条已经转成笔记、引用或作业内容的收藏，并检查下次还能否找回来源。',
+          '下周清单先保留1到3条最相关的资料，其余留在书签或归档区。',
+        ],
+        example: '检查时记下“本周已用几条、下周先用哪一条”。',
+      },
+    ],
+  },
+  C3: {
+    takeaway: '先把正在用的资料和待整理的资料分开，再定期复查副本和待处理文件。',
+    meaning: '“多维高分”描述的是多个问卷维度一起得分较高。这个剖面的学术需求、感知有用性、信息质量等指标得分较高，囤积行为的得分也相对突出。问卷行为题涉及保存后较少重看、归类和查找困难、删除时不安等情况。',
+    features: [
+      '学术需求、感知有用性和信息质量等七个相关因素的剖面均值超过4分。',
+      '数据素养（3.44分）和自我效能（3.62分）是这一类曲线上的相对低点。',
+      '囤积行为的剖面均值为3.86分，在三个剖面中最高。',
+    ],
+    dimensions: ['c', 'd', 'f', 'h', 'i', 'j'],
+    plan: [
+      {
+        when: '今天 · 15分钟',
+        title: '整理一个最常翻的目录',
+        steps: [
+          '选一个资料最多又最常用的目录，分出“当前项目”“待处理”“已归档”。',
+          '把正在使用的版本放进“当前项目”，已结束任务的关键资料放进“已归档”。',
+          '犹豫的资料先放“待处理”，给它约一个复查日期。原始数据和重要文件先核对备份及保留要求。',
+        ],
+        example: '“毕业论文／当前项目／综述资料”和“待处理／月底复查”。',
+      },
+      {
+        when: '下次下载时',
+        title: '先核对用途和已有版本',
+        steps: [
+          '想清楚这份资料服务于哪个任务，写进文件名或一行备注。',
+          '用题名、作者或DOI搜索电脑和网盘，检查是否已有同一份资料。',
+          '有多版时标明日期或版本号，常用目录只保留工作版。暂时只想回看时，保存来源链接即可。',
+        ],
+        example: '“研究设计_问卷正文_2026-11_v2”，旧版移入归档。',
+      },
+      {
+        when: '每周一次 · 15分钟',
+        title: '先复查5份，再检验能否找回',
+        steps: [
+          '从“待处理”取前5项，分别决定放回当前项目、归档，或核实后处理重复副本。',
+          '当场挑一份下周需要的资料，尝试在1分钟内找到。如果失败，优先调整文件名或任务目录。',
+        ],
+        example: '复查时记两项指标：“已处理数量”和“找回一份资料用时”。',
+      },
+    ],
+  },
+  general: {
+    takeaway: '先选一种容易坚持的整理方法。',
+    meaning: '几个类型的匹配程度接近。你可以查看自己的维度分数，挑选一两条和当前任务有关的建议试做。',
+    features: [],
+    dimensions: ['c', 'f', 'i', 'j'],
+    plan: [
+      {
+        when: '今天 · 10分钟',
+        title: '给常用的3份资料安排位置',
+        steps: ['选一项正在做的课程任务，为它建一个目录。', '把这项任务最常用的3份资料或链接放进去，并注明用途。'],
+        example: '“课程汇报／背景定义与参考资料”。',
+      },
+      {
+        when: '一周后 · 5分钟',
+        title: '挑一份资料试着找回',
+        steps: ['尝试在1分钟内找到要再次用的资料。', '如果查找费劲，就调整文件名或减少一层文件夹。'],
+        example: '记录“找到用了多少秒，下次要改哪一步”。',
+      },
+    ],
+  },
+};
+
+</script>
+<script>
+'use strict';
+
+(() => {
+  const model = window.QuizModel;
+  const feedback = window.QuizFeedback;
+  const get = id => document.getElementById(id);
+  const screens = ['intro', 'survey', 'result'];
+  const itemsPerPage = 7;
+  const totalPages = Math.ceil(model.items.length / itemsPerPage);
+  const scale = ['完全不同意', '比较不同意', '一般', '比较同意', '完全同意'];
+  const answers = Array(model.items.length).fill(null);
+  let page = 0;
+  let sampleOpen = false;
+
+  function make(tag, text, className) {
+    const node = document.createElement(tag);
+    if (text !== undefined) node.textContent = text;
+    if (className) node.className = className;
+    return node;
+  }
+
+  function showScreen(target, heading) {
+    for (const id of screens) get(id).hidden = id !== target;
+    if (heading) get(heading).focus({ preventScroll: true });
+    window.scrollTo(0, 0);
+  }
+
+  function setProgress() {
+    const count = answers.filter(Number.isInteger).length;
+    get('progress').max = model.items.length;
+    get('progress').value = count;
+    get('progress-label').textContent = `已答 ${count} / ${model.items.length}`;
+  }
+
+  function shownItems() {
+    return model.items.slice(page * itemsPerPage, (page + 1) * itemsPerPage);
+  }
+
+  function buildQuestion(item) {
+    const field = make('fieldset', undefined, 'question');
+    field.id = `item-${item.id}`;
+    const legend = make('legend');
+    legend.append(make('span', `${item.id}.`, 'question-no'), document.createTextNode(item.text));
+    field.append(legend);
+    const choices = make('div', undefined, 'choices');
+    for (let index = 0; index < scale.length; index++) {
+      const value = index + 1;
+      const label = make('label', undefined, 'choice');
+      const input = make('input');
+      input.type = 'radio';
+      input.name = `answer-${item.id}`;
+      input.value = value;
+      input.checked = answers[item.id - 1] === value;
+      input.addEventListener('change', () => {
+        answers[item.id - 1] = value;
+        field.classList.remove('invalid');
+        get('form-error').hidden = true;
+        setProgress();
+      });
+      label.append(input, make('span', scale[index], 'choice-text'));
+      choices.append(label);
+    }
+    field.append(choices);
+    return field;
+  }
+
+  function renderStep() {
+    get('step-label').textContent = `第 ${page + 1} 页，共 ${totalPages} 页`;
+    get('questions').replaceChildren(...shownItems().map(buildQuestion));
+    get('form-error').hidden = true;
+    get('back').textContent = page === 0 ? '返回首页' : '上一页';
+    get('next').textContent = page === totalPages - 1 ? '查看我的结果' : '下一页 →';
+    setProgress();
+    showScreen('survey', 'survey-title');
+  }
+
+  function percent(value) {
+    if (value > 0 && value < 0.005) return '<1%';
+    if (value > 0.995 && value < 1) return '>99%';
+    return `${Math.round(value * 100)}%`;
+  }
+
+  function displayRange(min, max, format) {
+    const a = format(min);
+    const b = format(max);
+    return a === b ? a : `${a}–${b}`;
+  }
+
+  function renderMatch(result) {
+    return result.probabilities.map(item => {
+      const type = model.types.find(record => record.id === item.id);
+      const row = make('div', undefined, 'match-row');
+      const line = make('p');
+      line.append(make('strong', type.name), make('span', displayRange(item.min, item.max, percent)));
+      const meter = make('div', undefined, 'match-meter');
+      meter.setAttribute('aria-hidden', 'true');
+      meter.style.setProperty('--tint', type.color);
+      const solid = make('span');
+      solid.style.width = `${item.min * 100}%`;
+      meter.append(solid);
+      if (item.max > item.min) {
+        const interval = make('span');
+        interval.style.left = `${item.min * 100}%`;
+        interval.style.width = `${(item.max - item.min) * 100}%`;
+        interval.classList.add('match-interval');
+        meter.append(interval);
+      }
+      row.append(line, meter);
+      return row;
+    });
+  }
+
+  function scoreText(score) {
+    return displayRange(score.min, score.max, value => value.toFixed(2));
+  }
+
+  function renderScoreComparison(result, type, content, example) {
+    const reference = type && model.profileMeans(type.id);
+    get('personal-title').textContent = reference ? '作答得分与类型参考' : '本次作答的代表性得分';
+    get('personal-score-label').textContent = example ? '示例得分' : '你的得分';
+    get('reference-label').hidden = !reference;
+    get('personal-note').textContent = reference
+      ? '下表选取几个能说明这类特点的维度，计分范围为1–5。类型匹配依据全部十个维度的得分组合。'
+      : '计分范围为1–5。你也可以在页面下方查看全部十项得分。';
+    const scores = new Map(result.scores.map(score => [score.id, score]));
+    get('personal-scores').replaceChildren(...content.dimensions.map(id => {
+      const score = scores.get(id);
+      const row = make('tr');
+      const label = make('th', score.label);
+      label.scope = 'row';
+      row.append(label, make('td', scoreText(score), 'own-score'));
+      if (reference) row.append(make('td', reference[id].toFixed(2)));
+      return row;
+    }));
+  }
+
+  function renderPlan(plan) {
+    get('advice-list').replaceChildren(...plan.map(item => {
+      const entry = make('li', undefined, 'plan-card');
+      const steps = make('ol', undefined, 'plan-steps');
+      steps.append(...item.steps.map(step => make('li', step)));
+      entry.append(make('p', item.when, 'plan-time'), make('h3', item.title), steps,
+        make('p', item.example, 'plan-example'));
+      return entry;
+    }));
+  }
+
+  function renderSampleTypes(selected) {
+    const tabs = get('sample-types');
+    tabs.hidden = !selected;
+    if (!selected) return;
+    tabs.replaceChildren(make('span', '切换示例'), ...model.types.map(type => {
+      const button = make('button', type.name, 'button secondary');
+      button.type = 'button';
+      button.setAttribute('aria-pressed', String(type.id === selected));
+      button.addEventListener('click', () => renderResult(exampleAnswers(type.id), type.id));
+      return button;
+    }));
+  }
+
+  function renderResult(input, sampleType = null) {
+    const result = model.evaluate(input);
+    const type = model.types.find(record => record.id === result.topType);
+    const content = feedback[type?.id ?? 'general'];
+    const example = Boolean(sampleType);
+    sampleOpen = example;
+    get('result-kicker').textContent = example ? '示例结果 · 演示作答' : '你的试填结果';
+    get('result-title').textContent = type
+      ? `${example ? '示例作答' : '你这次的作答'}最接近「${type.name}」`
+      : '本次作答接近多个类型';
+    get('result-takeaway').textContent = content.takeaway;
+    get('result-caution').hidden = !result.cautious;
+    get('result-caution').textContent = '这次的匹配程度偏弱，请把类型和下方建议作为参考。';
+    get('profile-title').textContent = type ? '这个类型有什么特点' : '怎样理解这次结果';
+    get('result-description').textContent = content.meaning;
+    get('profile-features').hidden = content.features.length === 0;
+    get('profile-features').replaceChildren(...content.features.map(feature => make('li', feature)));
+    renderScoreComparison(result, type, content, example);
+    renderPlan(content.plan);
+    renderSampleTypes(sampleType);
+    get('matches').replaceChildren(...renderMatch(result));
+    get('match-note').textContent = '匹配程度按暂定的33题计分。类型和整理建议用于试用与自我反思。';
+    get('dimension-scores').replaceChildren(...result.scores.map(score => {
+      const line = make('p');
+      line.append(make('span', score.label), make('strong', scoreText(score)));
+      return line;
+    }));
+    for (const disclosure of get('result').querySelectorAll('details')) disclosure.open = false;
+    get('edit').hidden = example;
+    showScreen('result', 'result-title');
+  }
+
+  function restart() {
+    answers.fill(null);
+    page = 0;
+    sampleOpen = false;
+    renderStep();
+  }
+
+  function exampleAnswers(typeId) {
+    // Construct an example for display from invented answers, never from the study records.
+    const exampleGroups = {
+      C1: { a: 2, b: 2, c: 2, d: 2, e: 1, f: 2, g: 3, h: 3, i: 3, j: 3 },
+      C2: { a: 3, b: 3, c: 4, d: 4, e: 3, f: 4, g: 3, h: 3, i: 3, j: 3 },
+      C3: { a: 4, b: 4, c: 4, d: 4, e: 4, f: 5, g: 4, h: 3, i: 4, j: 4 },
+    };
+    const groupValues = exampleGroups[typeId];
+    return model.items.map(item => groupValues[item.group]);
+  }
+
+  get('survey-form').addEventListener('submit', event => {
+    event.preventDefault();
+    const missing = shownItems().filter(item => !Number.isInteger(answers[item.id - 1]));
+    if (missing.length) {
+      for (const item of missing) get(`item-${item.id}`).classList.add('invalid');
+      get('form-error').textContent = `还有 ${missing.length} 道题未作答。请完成本页后继续。`;
+      get('form-error').hidden = false;
+      get(`item-${missing[0].id}`).querySelector('input').focus();
+      return;
+    }
+    if (page === totalPages - 1) {
+      renderResult(answers);
+    } else {
+      page++;
+      renderStep();
+    }
+  });
+
+  get('start').addEventListener('click', renderStep);
+  get('sample').addEventListener('click', () => renderResult(exampleAnswers('C2'), 'C2'));
+  get('restart').addEventListener('click', restart);
+  get('edit').addEventListener('click', () => {
+    if (!sampleOpen) renderStep();
+  });
+  get('back').addEventListener('click', () => {
+    if (page === 0) {
+      showScreen('intro', 'start');
+    } else {
+      page--;
+      renderStep();
+    }
+  });
+  get('home-link').addEventListener('click', event => {
+    event.preventDefault();
+    showScreen('intro', 'start');
+  });
+})();
+
+</script>
+</body>
+</html>

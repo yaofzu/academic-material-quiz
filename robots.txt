@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yaofzu.github.io/academic-material-quiz/sitemap.xml
