@@ -586,7 +586,6 @@ window.QuizFeedback = {
           '从收藏夹选1份最能回答该任务问题的资料，写下“用途、下一步、来源”三项。',
           '把它放进“本周要用”，或者直接把来源链接贴进任务笔记。',
         ],
-        example: '“汇报背景｜核对第2页定义｜保留作者、年份和链接。”',
       },
       {
         when: '本周找一次 · 15分钟',
@@ -596,7 +595,6 @@ window.QuizFeedback = {
           '用自己的话记一条核心观点，再补一条证据或一个引用位置。',
           '把笔记贴到汇报提纲或论文草稿，用过的资料标记成“已用”。',
         ],
-        example: '“作者如何区分收藏与囤积？定义见第3页，可放在概念界定。”',
       },
       {
         when: '一周后 · 5分钟',
@@ -605,7 +603,6 @@ window.QuizFeedback = {
           '找出至少1条已经转成笔记、引用或作业内容的收藏，并检查下次还能否找回来源。',
           '下周清单先保留1到3条最相关的资料，其余留在书签或归档区。',
         ],
-        example: '检查时记下“本周已用几条、下周先用哪一条”。',
       },
     ],
   },
@@ -815,8 +812,8 @@ window.QuizFeedback = {
       const entry = make('li', undefined, 'plan-card');
       const steps = make('ol', undefined, 'plan-steps');
       steps.append(...item.steps.map(step => make('li', step)));
-      entry.append(make('p', item.when, 'plan-time'), make('h3', item.title), steps,
-        make('p', item.example, 'plan-example'));
+      entry.append(make('p', item.when, 'plan-time'), make('h3', item.title), steps);
+      if (item.example) entry.append(make('p', item.example, 'plan-example'));
       return entry;
     }));
   }
