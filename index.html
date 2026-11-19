@@ -161,7 +161,6 @@ progress::-moz-progress-bar { background: var(--blue); }
 .gauge-item.is-top { color: #fff; }
 .gauge-item.is-top b { color: #fff; font-weight: 760; }
 .profile-data { margin-top: 14px; padding: 10px 13px; border-radius: 10px; background: #f3f9ff; border: 1px dashed #cfe2f2; color: #33506a; font-size: 13px; line-height: 1.75; }
-.plan-basis { display: inline-block; margin: 8px 0 2px; padding: 3px 9px; border-radius: 999px; background: #eef6fe; color: #2c6f9f; font-size: 11.5px; }
 
 .section-index { font-size: 11px; letter-spacing: .14em; color: #5d89b2; font-weight: 700; margin-bottom: 5px; }
 .result-grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(300px, .92fr); gap: 18px; margin: 20px 0; }
@@ -187,18 +186,32 @@ progress::-moz-progress-bar { background: var(--blue); }
 .score-ref { position: absolute; top: -3px; width: 2px; height: 16px; border-radius: 2px; background: #16324a; opacity: .42; }
 .score-value { text-align: right; font-variant-numeric: tabular-nums; font-weight: 720; color: #0f4c81; }
 .score-ref-value { text-align: right; font-variant-numeric: tabular-nums; color: #738aa0; font-size: 12.5px; }
-.action-plan { margin: 26px 0 18px; }
+.action-plan { margin: 30px 0 20px; }
 .action-plan h2 { font-size: 21px; letter-spacing: -.02em; }
 .action-plan > p { margin: 6px 0 0; font-size: 13.5px; }
-.plan-list { margin-top: 16px; display: grid; gap: 14px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.plan-card { position: relative; overflow: hidden; padding: 20px 18px 18px; border: 1px solid #dbe6f2; border-radius: 16px; background: #fff; box-shadow: 0 16px 36px -34px rgba(14,50,82,.6); }
-.plan-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: linear-gradient(90deg, #2f8bd6, #86d1f2); }
-.plan-head { display: flex; align-items: center; gap: 10px; }
-.plan-step { flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-content: center; background: #e8f3fd; color: #0f5a94; font-size: 13px; font-weight: 760; font-variant-numeric: tabular-nums; }
-.plan-time { font-size: 12.5px; font-weight: 650; color: #2c6f9f; }
-.plan-card h3 { margin: 11px 0 10px; font-size: 16.5px; line-height: 1.45; letter-spacing: -.01em; }
-.plan-steps { padding-left: 18px; margin: 0; font-size: 13.5px; line-height: 1.72; color: #3b566f; }
-.plan-steps li + li { margin-top: 7px; }
+.plan-list { position: relative; margin: 20px 0 0; padding: 2px 0 2px 56px; list-style: none; display: grid; gap: 18px; grid-template-columns: 1fr; }
+.plan-list::before { content: ""; position: absolute; left: 21px; top: 18px; bottom: 34px; width: 2px; border-radius: 2px; background: linear-gradient(180deg, #d7e5f3, #e6eff8 72%, rgba(230,239,248,0)); }
+.plan-card { position: relative; padding: 18px 18px 16px; border: 1px solid #e3edf7; border-radius: 18px; background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%); box-shadow: 0 18px 40px -36px rgba(13,49,80,.62); transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+.plan-card:hover { transform: translateY(-2px); border-color: #cfe2f4; box-shadow: 0 24px 48px -34px rgba(13,49,80,.55); }
+.plan-list > li:first-child { border-color: #f0dcc0; background: linear-gradient(180deg, #fffdf8 0%, #ffffff 46%); }
+.plan-node { position: absolute; left: -52px; top: 16px; width: 36px; height: 36px; border-radius: 50%; display: grid; place-content: center; background: linear-gradient(145deg, #2f86cf, #16609b); color: #fff; font-size: 13px; font-weight: 760; font-variant-numeric: tabular-nums; box-shadow: 0 0 0 4px #fff, 0 12px 22px -14px rgba(19,86,142,.9); }
+.plan-node.is-first { background: linear-gradient(145deg, #f0a63f, #db7a16); box-shadow: 0 0 0 4px #fff, 0 12px 24px -12px rgba(206,120,26,.8); }
+.plan-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.plan-time { padding: 4px 10px; border-radius: 999px; background: #edf6fe; color: #1f6497; font-size: 11.5px; font-weight: 650; }
+.plan-tag { padding: 4px 9px; border-radius: 999px; background: #fff3e2; color: #a56413; font-size: 11px; font-weight: 650; }
+.plan-card h3 { margin: 11px 0 12px; font-size: 17px; line-height: 1.42; letter-spacing: -.012em; color: #123a5c; }
+.plan-evidence { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 8px 11px; border: 1px solid #e6f1fa; border-radius: 11px; background: #f5faff; font-size: 12px; color: #41637e; }
+.plan-evidence-label { font-weight: 650; color: #1d5c8c; }
+.plan-evidence-note { font-size: 11.5px; color: #7c96ac; }
+.plan-chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 999px; border: 1px solid #e1ecf7; background: #fff; font-size: 11.5px; color: #517088; }
+.plan-chip b { font-weight: 720; color: #1d5c8c; font-variant-numeric: tabular-nums; }
+.plan-dots { display: flex; gap: 3px; }
+.plan-dots i { width: 12px; height: 5px; border-radius: 3px; background: #dae7f4; }
+.plan-dots i.on { background: linear-gradient(90deg, #3f95da, #7dc9ee); }
+.plan-value { margin-left: auto; font-weight: 720; font-variant-numeric: tabular-nums; color: #1d5c8c; }
+.plan-steps { counter-reset: planstep; margin: 14px 0 0; padding: 12px 0 0; border-top: 1px dashed #e8f0f8; list-style: none; display: grid; gap: 9px; font-size: 13.5px; line-height: 1.7; color: #3b566f; }
+.plan-steps li { counter-increment: planstep; display: grid; grid-template-columns: 18px 1fr; gap: 9px; align-items: start; }
+.plan-steps li::before { content: counter(planstep); width: 18px; height: 18px; margin-top: 2px; border-radius: 6px; display: grid; place-content: center; background: #eef6fe; color: #2c6f9f; font-size: 10.5px; font-weight: 700; }
 .plan-example { margin-top: 12px; padding: 9px 11px; border-left: 2px solid #a9d2f3; border-radius: 0 8px 8px 0; background: #f2f8ff; color: #3d5a76; font-size: 12.5px; }
 .dim-bars { display: grid; gap: 9px; margin-top: 12px; }
 .dim-bar { display: grid; grid-template-columns: 80px minmax(0, 1fr) 42px; gap: 10px; align-items: center; font-size: 12.5px; }
@@ -378,7 +391,7 @@ progress::-moz-progress-bar { background: var(--blue); }
       <section class="action-plan" aria-labelledby="advice-title">
         <p class="section-index">04 · 行动建议</p>
         <h2 id="advice-title">你的囤积改善计划</h2>
-        <p class="muted">先试第一步，一周后用最后一步看看是否更容易找回资料。</p>
+        <p class="muted" id="advice-note">先试第一步，一周后用最后一步看看是否更容易找回资料。</p>
         <ol class="plan-list" id="advice-list"></ol>
       </section>
       <details class="result-details">
@@ -1160,7 +1173,12 @@ window.QuizFeedback = {
         when: index === 0 ? '今天 · 10分钟' : '本周找一次 · 15分钟',
         title: advice.title,
         steps: advice.steps,
-        basis: `依据：${item.label} ${item.mid.toFixed(2)} 分（十维中${levelText(item)}${index === 0 ? '，本次优先级最高' : ''}）`,
+        basis: {
+          label: item.label,
+          value: item.mid,
+          note: levelText(item),
+          primary: index === 0,
+        },
       };
     });
     const hoard = scored.find(score => score.id === 'j');
@@ -1174,7 +1192,13 @@ window.QuizFeedback = {
           '囤积行为降了、自我效能没动：清理在推进，“用上”还没跟上，下周把时间放在读和写。',
           '两个都动了：把这两周的做法写成三行流程，固定下来。',
         ],
-        basis: '依据：本次十维得分',
+        basis: {
+          label: '复查指标',
+          metrics: [
+            { label: '囤积行为', value: hoard.mid },
+            { label: '自我效能', value: efficacy.mid },
+          ],
+        },
       });
     }
     return cards;
@@ -1320,12 +1344,35 @@ window.QuizFeedback = {
   function renderPlan(plan) {
     get('advice-list').replaceChildren(...plan.map((item, index) => {
       const entry = make('li', undefined, 'plan-card');
-      const head = make('div', undefined, 'plan-head');
-      head.append(make('span', String(index + 1), 'plan-step'), make('p', item.when, 'plan-time'));
+      const node = make('span', String(index + 1).padStart(2, '0'), index === 0 ? 'plan-node is-first' : 'plan-node');
+      node.setAttribute('aria-hidden', 'true');
+      const meta = make('div', undefined, 'plan-meta');
+      meta.append(make('span', item.when, 'plan-time'));
+      if (item.basis && item.basis.primary) meta.append(make('span', '优先级最高', 'plan-tag'));
+      entry.append(node, meta, make('h3', item.title));
+      if (item.basis) {
+        const evidence = make('div', undefined, 'plan-evidence');
+        evidence.append(make('span', item.basis.label, 'plan-evidence-label'));
+        if (Array.isArray(item.basis.metrics)) {
+          item.basis.metrics.forEach(metric => {
+            const chip = make('span', '', 'plan-chip');
+            chip.append(make('span', metric.label), make('b', metric.value.toFixed(2)));
+            evidence.append(chip);
+          });
+        } else {
+          if (item.basis.note) evidence.append(make('span', item.basis.note, 'plan-evidence-note'));
+          if (Number.isFinite(item.basis.value)) {
+            const dots = make('div', undefined, 'plan-dots');
+            dots.setAttribute('aria-hidden', 'true');
+            const filled = Math.max(0, Math.min(5, Math.round(item.basis.value)));
+            for (let dot = 1; dot <= 5; dot += 1) dots.append(make('i', '', dot <= filled ? 'on' : ''));
+            evidence.append(dots, make('span', item.basis.value.toFixed(2), 'plan-value'));
+          }
+        }
+        entry.append(evidence);
+      }
       const steps = make('ol', undefined, 'plan-steps');
       steps.append(...item.steps.map(step => make('li', step)));
-      entry.append(head, make('h3', item.title));
-      if (item.basis) entry.append(make('p', item.basis, 'plan-basis'));
       entry.append(steps);
       if (item.example) entry.append(make('p', item.example, 'plan-example'));
       return entry;
@@ -1372,7 +1419,11 @@ window.QuizFeedback = {
     renderScoreComparison(result, type, content, example);
     renderRadar(result.scores, type ? model.profileMeans(type.id) : null);
     renderGauge(result);
-    renderPlan(buildPersonalPlan(result) || content.plan);
+    const personalPlan = buildPersonalPlan(result);
+    renderPlan(personalPlan || content.plan);
+    get('advice-note').textContent = personalPlan
+      ? '按你这次得分最突出的两个维度排序，第三步用两个数字复查是否真的变好。'
+      : '先试第一步，一周后用最后一步看看是否更容易找回资料。';
     renderSampleTypes(sampleType);
     get('matches').replaceChildren(...renderMatch(result));
     get('match-note').textContent = '吻合度＝十个维度与你所得分的平均贴合程度，三类各自独立计算，不必相加为 100%，会随每份作答变化；类型与建议仍取吻合度最高的一类。';
