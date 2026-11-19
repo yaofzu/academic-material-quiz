@@ -387,7 +387,7 @@ progress::-moz-progress-bar { background: var(--blue); }
       </details>
 
       <details class="result-details">
-        <summary>查看与三个剖面的匹配程度</summary>
+        <summary>查看与三个剖面的吻合度</summary>
         <div id="matches" class="match-list"></div>
         <p id="match-note" class="muted match-note"></p>
       </details>
@@ -567,13 +567,25 @@ progress::-moz-progress-bar { background: var(--blue); }
     };
   }
 
+  // 逐维契合度的平均值：每个维度与该类均值的贴合程度取平均，三类互不影响，
+  // 因此同一份作答会得到三个独立的数值，不同作答之间差异也明显。
+  function fits(scores) {
+    const scoreZ = standardize(scores);
+    return meansZ.map(means => {
+      const perDimension = means.map((meanZ, i) => (
+        Math.exp(-0.5 * ((scoreZ[i] - meanZ) ** 2) / model.variance[i])
+      ));
+      return perDimension.reduce((sum, value) => sum + value, 0) / perDimension.length;
+    });
+  }
+
   function profileMeans(typeId) {
     const index = types.findIndex(type => type.id === typeId);
     if (index < 0) return null;
     return Object.fromEntries(groups.map(({ id }, dimension) => [id, model.means[index][dimension]]));
   }
 
-  window.QuizModel = { items, groups, types, evaluate, posterior, profileMeans };
+  window.QuizModel = { items, groups, types, evaluate, posterior, profileMeans, fits };
 })();
 
 </script>
@@ -1054,21 +1066,28 @@ window.QuizFeedback = {
     return (score.min + score.max) / 2;
   }
 
-  // 原始后验概率常出现 0/1 饱和，这里做温和软化，只用于并列展示三类的相对接近程度。
-  function softenShares(probabilities) {
-    const raw = probabilities.map(item => Math.pow(Math.max((item.min + item.max) / 2, 0.0001), 0.25));
-    const total = raw.reduce((sum, value) => sum + value, 0) || 1;
-    return probabilities
-      .map((item, index) => ({ ...item, share: raw[index] / total }))
-      .sort((a, b) => b.share - a.share);
+  // 每个类型与这份剖面的逐维吻合度（0–1 之间，三类各自独立，不必相加为 100）。
+  function typeFits(result) {
+    const mids = result.scores.map(score => midScore(score));
+    const values = model.fits(mids);
+    return model.types
+      .map((type, index) => ({
+        id: type.id,
+        name: type.name,
+        color: type.color,
+        fit: Number.isFinite(values[index]) ? values[index] : 0,
+      }))
+      .sort((a, b) => b.fit - a.fit);
   }
+
+  const fitText = value => `${Math.min(99, Math.max(1, Math.round(value * 100)))}%`;
 
   function renderGauge(result) {
     const host = get('hero-gauge');
     if (!host) return;
     const hero = get('result').querySelector('.result-hero');
-    const shares = result.probabilities.length ? softenShares(result.probabilities) : [];
-    const top = shares[0];
+    const fits = typeFits(result);
+    const top = fits.find(item => item.id === result.topType) || fits[0];
     if (!top) {
       host.hidden = true;
       host.replaceChildren();
@@ -1077,20 +1096,18 @@ window.QuizFeedback = {
     }
     host.hidden = false;
     if (hero) hero.classList.remove('no-gauge');
-    const type = model.types.find(record => record.id === top.id);
     const ring = make('div', undefined, 'gauge-ring');
-    ring.style.setProperty('--angle', `${Math.round(top.share * 360)}deg`);
-    ring.style.setProperty('--tint', type ? type.color : '#7cc6ff');
+    ring.style.setProperty('--angle', `${Math.round(top.fit * 360)}deg`);
+    ring.style.setProperty('--tint', top.color || '#7cc6ff');
     const inner = make('div', undefined, 'gauge-inner');
-    inner.append(make('span', percent(top.share), 'gauge-value'), make('span', '最接近的类型', 'gauge-label'));
+    inner.append(make('span', fitText(top.fit), 'gauge-value'), make('span', '剖面吻合度', 'gauge-label'));
     ring.append(inner);
     const list = make('div', undefined, 'gauge-list');
-    shares.forEach(item => {
-      const record = model.types.find(entry => entry.id === item.id);
+    [top, ...fits.filter(item => item !== top)].forEach(item => {
       const row = make('div', '', item.id === top.id ? 'gauge-item is-top' : 'gauge-item');
       const dot = make('i');
-      dot.style.background = record ? record.color : '#7cc6ff';
-      row.append(dot, make('span', record ? record.name : item.id), make('b', percent(item.share)));
+      dot.style.background = item.color;
+      row.append(dot, make('span', item.name), make('b', fitText(item.fit)));
       list.append(row);
     });
     host.replaceChildren(ring, list);
@@ -1247,18 +1264,19 @@ window.QuizFeedback = {
   }
 
   function renderMatch(result) {
-    return softenShares(result.probabilities).map(item => {
-      const type = model.types.find(record => record.id === item.id);
+    const fits = typeFits(result);
+    const top = fits.find(item => item.id === result.topType) || fits[0];
+    return [top, ...fits.filter(item => item !== top)].map(item => {
       const row = make('div', undefined, 'match-row');
       const line = make('p');
-      line.append(make('strong', type.name));
+      line.append(make('strong', item.name));
       if (item.id === result.topType) line.append(make('span', '最接近', 'match-badge'));
-      line.append(make('span', percent(item.share)));
+      line.append(make('span', fitText(item.fit)));
       const meter = make('div', undefined, 'match-meter');
       meter.setAttribute('aria-hidden', 'true');
-      meter.style.setProperty('--tint', type.color);
+      meter.style.setProperty('--tint', item.color);
       const solid = make('span');
-      solid.style.width = `${item.share * 100}%`;
+      solid.style.width = `${Math.min(100, item.fit * 100)}%`;
       meter.append(solid);
       row.append(line, meter);
       return row;
@@ -1357,7 +1375,7 @@ window.QuizFeedback = {
     renderPlan(buildPersonalPlan(result) || content.plan);
     renderSampleTypes(sampleType);
     get('matches').replaceChildren(...renderMatch(result));
-    get('match-note').textContent = '三类匹配度按作答剖面与类型均值的接近程度换算，并做了软化处理，三项相加为 100%，用于比较相对接近程度，不作概率判断。';
+    get('match-note').textContent = '吻合度＝十个维度与你所得分的平均贴合程度，三类各自独立计算，不必相加为 100%，会随每份作答变化；类型与建议仍取吻合度最高的一类。';
     get('dimension-scores').replaceChildren(...result.scores.map(score => {
       const row = make('div', undefined, 'dim-bar');
       const track = make('div', undefined, 'dim-track');
