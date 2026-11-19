@@ -132,6 +132,86 @@ progress::-moz-progress-bar { background: var(--blue); }
 .score-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(148px, 1fr)); gap: 7px; padding-bottom: 12px; }
 .score-list p { background: #edf4fb; padding: 8px 9px; display: flex; justify-content: space-between; gap: 5px; font-size: 12px; border-radius: 6px; margin: 0; }
 .result-actions { margin-top: 20px; }
+
+/* ===== 结果页 · 视觉升级 ===== */
+.results { padding: 34px 0 26px; }
+.result-hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 172px; gap: 30px; align-items: center; padding: 34px 36px; border-radius: 26px; color: #f2f9ff; overflow: hidden; background: radial-gradient(130% 130% at 100% 0%, rgba(122,198,255,.5) 0%, rgba(122,198,255,0) 54%), linear-gradient(135deg, #0c2f52 0%, #12466f 52%, #1a6492 100%); box-shadow: 0 26px 60px -40px rgba(9,40,70,.8); }
+.result-hero::after { content: ""; position: absolute; right: -70px; bottom: -130px; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.16), rgba(255,255,255,0) 70%); pointer-events: none; }
+.hero-copy { min-width: 0; }
+.result-hero .kicker { color: #9fd0ff; font-size: 12.5px; letter-spacing: .1em; margin-bottom: 4px; }
+.result-hero h1 { color: #fff; font-size: clamp(24px, 3.6vw, 38px); line-height: 1.28; letter-spacing: -.02em; margin-top: 4px; max-width: 20em; text-wrap: balance; }
+.result-prefix { display: block; font-size: .56em; font-weight: 650; letter-spacing: .01em; color: rgba(214,236,255,.8); margin-bottom: 8px; }
+.result-type { display: block; }
+.result-hero .lead { color: rgba(231,244,255,.9); font-size: 15px; line-height: 1.85; margin-top: 14px; max-width: 38em; }
+.result-caution { margin-top: 14px; padding: 9px 13px; border-left: 3px solid #f2c078; border-radius: 0 9px 9px 0; background: rgba(255,214,150,.13); color: #ffe3ba; font-size: 13px; }
+.sample-types { margin-top: 20px; color: rgba(214,235,255,.72); }
+.sample-types .button { min-height: 34px; padding: 6px 13px; border-radius: 999px; font-size: 12.5px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22); color: #e9f4ff; }
+.sample-types .button:hover { background: rgba(255,255,255,.18); }
+.sample-types .button[aria-pressed="true"] { background: #fff; border-color: #fff; color: #0e3a5f; font-weight: 700; }
+.gauge { display: grid; justify-items: center; gap: 9px; }
+.gauge-ring { width: 146px; height: 146px; border-radius: 50%; padding: 9px; background: conic-gradient(var(--tint, #7cc6ff) var(--angle, 0deg), rgba(255,255,255,.16) 0deg); box-shadow: inset 0 0 0 1px rgba(255,255,255,.16); }
+.gauge-inner { width: 128px; height: 128px; border-radius: 50%; background: linear-gradient(160deg, #0a2947, #124064); display: grid; place-content: center; text-align: center; gap: 3px; }
+.gauge-value { font-size: 29px; font-weight: 760; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.gauge-label { font-size: 11px; letter-spacing: .08em; color: rgba(204,229,250,.82); }
+.gauge-range { font-size: 11.5px; color: rgba(204,229,250,.7); }
+
+.section-index { font-size: 11px; letter-spacing: .14em; color: #5d89b2; font-weight: 700; margin-bottom: 5px; }
+.result-grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(300px, .92fr); gap: 18px; margin: 20px 0; }
+.result-card { background: #fff; border: 1px solid #dbe6f2; border-radius: 20px; padding: 26px 26px 24px; box-shadow: 0 18px 44px -36px rgba(14,50,82,.55); }
+.result-card h2 { font-size: 21px; letter-spacing: -.02em; }
+.result-description { margin-top: 12px; font-size: 14.5px; line-height: 1.88; color: #33506a; }
+.profile-features { margin: 14px 0 0; padding-left: 20px; color: #405d78; font-size: 13.5px; }
+.profile-features li + li { margin-top: 7px; }
+.personal-note { font-size: 13px; margin-top: 8px; }
+.radar-card { background: linear-gradient(180deg, #fcfdff, #f1f8ff); }
+.radar-wrap { margin-top: 4px; }
+.radar-wrap svg { width: 100%; height: auto; display: block; }
+.radar-legend { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: center; margin-top: 2px; font-size: 11.5px; color: #6b8499; }
+.legend-dot { width: 9px; height: 9px; border-radius: 3px; display: inline-block; margin-right: 6px; vertical-align: -1px; }
+.compare-card { margin-bottom: 4px; }
+.score-caption { display: grid; grid-template-columns: 76px minmax(0, 1fr) 50px 52px; gap: 10px; font-size: 11px; color: #8298ad; margin: 14px 0 0; }
+.score-caption span:nth-child(2) { grid-column: 2; text-align: right; }
+.score-rows { display: grid; gap: 11px; margin-top: 9px; }
+.score-row { display: grid; grid-template-columns: 76px minmax(0, 1fr) 50px 52px; gap: 10px; align-items: center; font-size: 13px; }
+.score-name { color: #22415c; font-weight: 650; }
+.score-track { position: relative; height: 10px; border-radius: 999px; background: #eaf1f8; }
+.score-fill { position: absolute; top: 0; bottom: 0; left: 0; border-radius: 999px; background: linear-gradient(90deg, #2f8bd6, #6fc0f0); }
+.score-ref { position: absolute; top: -3px; width: 2px; height: 16px; border-radius: 2px; background: #16324a; opacity: .42; }
+.score-value { text-align: right; font-variant-numeric: tabular-nums; font-weight: 720; color: #0f4c81; }
+.score-ref-value { text-align: right; font-variant-numeric: tabular-nums; color: #738aa0; font-size: 12.5px; }
+.action-plan { margin: 26px 0 18px; }
+.action-plan h2 { font-size: 21px; letter-spacing: -.02em; }
+.action-plan > p { margin: 6px 0 0; font-size: 13.5px; }
+.plan-list { margin-top: 16px; display: grid; gap: 14px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.plan-card { position: relative; overflow: hidden; padding: 20px 18px 18px; border: 1px solid #dbe6f2; border-radius: 16px; background: #fff; box-shadow: 0 16px 36px -34px rgba(14,50,82,.6); }
+.plan-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: linear-gradient(90deg, #2f8bd6, #86d1f2); }
+.plan-head { display: flex; align-items: center; gap: 10px; }
+.plan-step { flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-content: center; background: #e8f3fd; color: #0f5a94; font-size: 13px; font-weight: 760; font-variant-numeric: tabular-nums; }
+.plan-time { font-size: 12.5px; font-weight: 650; color: #2c6f9f; }
+.plan-card h3 { margin: 11px 0 10px; font-size: 16.5px; line-height: 1.45; letter-spacing: -.01em; }
+.plan-steps { padding-left: 18px; margin: 0; font-size: 13.5px; line-height: 1.72; color: #3b566f; }
+.plan-steps li + li { margin-top: 7px; }
+.plan-example { margin-top: 12px; padding: 9px 11px; border-left: 2px solid #a9d2f3; border-radius: 0 8px 8px 0; background: #f2f8ff; color: #3d5a76; font-size: 12.5px; }
+.dim-bars { display: grid; gap: 9px; margin-top: 12px; }
+.dim-bar { display: grid; grid-template-columns: 80px minmax(0, 1fr) 42px; gap: 10px; align-items: center; font-size: 12.5px; }
+.dim-name { color: #33506a; }
+.dim-track { height: 8px; border-radius: 999px; background: #eaf1f8; }
+.dim-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #3b93dc, #8bd2f5); }
+.dim-value { text-align: right; color: #33506a; font-variant-numeric: tabular-nums; }
+.match-list { display: grid; gap: 15px; margin-top: 14px; }
+.match-row p { font-size: 13px; color: #22415c; }
+.match-badge { margin-left: 7px; padding: 1px 8px; border-radius: 999px; background: #e6f3ff; color: #0f5a94; font-size: 11px; font-weight: 700; vertical-align: 1px; }
+.match-meter { position: relative; height: 10px; border-radius: 999px; background: #eaf1f8; margin-top: 7px; overflow: hidden; }
+.match-meter span { display: block; height: 100%; border-radius: 999px; background: var(--tint); opacity: .92; }
+.match-meter .match-interval { position: absolute; top: 0; opacity: .34; }
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.result-details { margin-top: 12px; padding: 2px 18px 14px; background: #fff; border: 1px solid #dbe6f2; border-top: 1px solid #dbe6f2; border-radius: 14px; box-shadow: 0 14px 34px -34px rgba(14,50,82,.5); }
+.result-details summary { padding: 12px 0 10px; }
+.result-details[open] summary { border-bottom: 1px solid #e7eff7; margin-bottom: 13px; }
+.result-hero, .result-card, .plan-card, .action-plan { animation: rise .5s cubic-bezier(.22,.7,.3,1) both; }
+.result-card:nth-child(2) { animation-delay: .06s; }
+.compare-card { animation-delay: .1s; }
+@media (prefers-reduced-motion: reduce) { .result-hero, .result-card, .plan-card, .action-plan { animation: none; } }
 .concept { grid-column: 1 / -1; margin-top: 2px; padding: 26px 30px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); }
 .concept h2 { margin-bottom: 10px; }
 .concept .concept-lead { color: var(--muted); font-size: 15px; max-width: 68em; }
@@ -150,6 +230,13 @@ progress::-moz-progress-bar { background: var(--blue); }
   .intro-panel { padding: 22px 25px; }
   .result-grid { grid-template-columns: 1fr; }
   .plan-list { grid-template-columns: 1fr; }
+  .result-hero { grid-template-columns: 1fr; gap: 20px; padding: 26px 24px; }
+  .gauge { justify-items: start; }
+  .gauge-ring { width: 120px; height: 120px; padding: 8px; }
+  .gauge-inner { width: 104px; height: 104px; }
+  .gauge-value { font-size: 24px; }
+  .result-card { padding: 21px 20px 19px; }
+  .score-caption, .score-row { grid-template-columns: 66px minmax(0, 1fr) 44px 46px; gap: 8px; }
 }
 @media (max-width: 470px) {
   .wrap { width: calc(100% - 26px); }
@@ -249,37 +336,47 @@ progress::-moz-progress-bar { background: var(--blue); }
     </section>
 
     <section id="result" class="results" aria-labelledby="result-title" hidden>
-      <div class="result-heading">
-        <p class="kicker" id="result-kicker">你的问卷结果</p>
-        <h1 id="result-title" tabindex="-1">剖面匹配结果</h1>
-        <p class="lead result-takeaway" id="result-takeaway"></p>
-        <p id="result-caution" class="result-caution" hidden></p>
-      </div>
-      <div id="sample-types" class="sample-types" role="group" aria-label="切换示例类型" hidden></div>
+      <header class="result-hero">
+        <div class="hero-copy">
+          <p class="kicker" id="result-kicker">你的问卷结果</p>
+          <h1 id="result-title" tabindex="-1">剖面匹配结果</h1>
+          <p class="lead result-takeaway" id="result-takeaway"></p>
+          <p id="result-caution" class="result-caution" hidden></p>
+          <div id="sample-types" class="sample-types" role="group" aria-label="切换示例类型" hidden></div>
+        </div>
+        <div id="hero-gauge" class="gauge" aria-hidden="true"></div>
+      </header>
       <div class="result-grid">
         <section class="result-card" aria-labelledby="profile-title">
+          <p class="section-index">01 · 剖面解读</p>
           <h2 id="profile-title">这个类型有什么特点</h2>
           <p id="result-description" class="result-description"></p>
           <ul id="profile-features" class="profile-features"></ul>
         </section>
-        <section class="result-card score-card" aria-labelledby="personal-title">
-          <h2 id="personal-title">你的得分与类型参考</h2>
-          <p id="personal-note" class="muted personal-note"></p>
-          <table class="personal-table">
-            <thead><tr><th scope="col">维度</th><th scope="col" id="personal-score-label">你的得分</th><th scope="col" id="reference-label">类型均值</th></tr></thead>
-            <tbody id="personal-scores"></tbody>
-          </table>
+        <section class="result-card radar-card" aria-labelledby="radar-title">
+          <p class="section-index">02 · 十维形状</p>
+          <h2 id="radar-title">你的得分轮廓</h2>
+          <div id="radar" class="radar-wrap"></div>
+          <p id="radar-legend" class="radar-legend"></p>
         </section>
       </div>
+      <section class="result-card compare-card" aria-labelledby="personal-title">
+        <p class="section-index">03 · 得分对照</p>
+        <h2 id="personal-title">作答得分与类型参考</h2>
+        <p id="personal-note" class="muted personal-note"></p>
+        <div id="personal-scores" class="score-rows"></div>
+      </section>
       <section class="action-plan" aria-labelledby="advice-title">
+        <p class="section-index">04 · 行动建议</p>
         <h2 id="advice-title">你的囤积改善计划</h2>
         <p class="muted">先试第一步，一周后用最后一步看看是否更容易找回资料。</p>
         <ol class="plan-list" id="advice-list"></ol>
       </section>
       <details class="result-details">
         <summary>查看十个维度得分</summary>
-        <div id="dimension-scores" class="score-list"></div>
+        <div id="dimension-scores" class="dim-bars"></div>
       </details>
+
       <details class="result-details">
         <summary>查看与三个剖面的匹配程度</summary>
         <div id="matches" class="match-list"></div>
@@ -759,12 +856,117 @@ window.QuizFeedback = {
     return a === b ? a : `${a}–${b}`;
   }
 
+  function midScore(score) {
+    return (score.min + score.max) / 2;
+  }
+
+  function renderGauge(result) {
+    const host = get('hero-gauge');
+    if (!host) return;
+    const top = result.probabilities.slice().sort((a, b) => (b.min + b.max) - (a.min + a.max))[0];
+    if (!top) { host.replaceChildren(); return; }
+    const type = model.types.find(record => record.id === top.id);
+    const mid = (top.min + top.max) / 2;
+    const ring = make('div', undefined, 'gauge-ring');
+    ring.style.setProperty('--angle', `${Math.round(mid * 360)}deg`);
+    ring.style.setProperty('--tint', type ? type.color : '#7cc6ff');
+    const inner = make('div', undefined, 'gauge-inner');
+    inner.append(make('span', percent(mid), 'gauge-value'), make('span', '类型匹配度', 'gauge-label'));
+    ring.append(inner);
+    host.replaceChildren(ring, make('p', `匹配区间 ${displayRange(top.min, top.max, percent)}`, 'gauge-range'));
+  }
+
+  function renderRadar(scores, reference) {
+    const host = get('radar');
+    const legend = get('radar-legend');
+    const NS = 'http://www.w3.org/2000/svg';
+    const size = 400;
+    const cx = size / 2;
+    const cy = size / 2;
+    const R = 124;
+    const n = scores.length;
+    const angle = i => -Math.PI / 2 + (2 * Math.PI * i) / n;
+    const at = (i, value) => {
+      const r = R * (value - 1) / 4;
+      return [cx + r * Math.cos(angle(i)), cy + r * Math.sin(angle(i))];
+    };
+    const el = (tag, attrs = {}) => {
+      const node = document.createElementNS(NS, tag);
+      for (const [key, value] of Object.entries(attrs)) node.setAttribute(key, value);
+      return node;
+    };
+    const svg = el('svg', { viewBox: `0 0 ${size} ${size}`, role: 'img', 'aria-label': '十个维度得分轮廓，范围为 1 到 5 分' });
+
+    const defs = el('defs');
+    const gradient = el('linearGradient', { id: 'radar-fill', x1: '0', y1: '0', x2: '0', y2: '1' });
+    gradient.append(el('stop', { offset: '0%', 'stop-color': '#4aa3e8', 'stop-opacity': '.45' }),
+      el('stop', { offset: '100%', 'stop-color': '#4aa3e8', 'stop-opacity': '.1' }));
+    defs.append(gradient);
+    svg.append(defs);
+
+    for (let level = 1; level <= 5; level += 1) {
+      svg.append(el('circle', {
+        cx, cy, r: Math.max(R * (level - 1) / 4, 0.5), fill: 'none',
+        stroke: level === 5 ? '#c6dbef' : '#e1ecf6', 'stroke-width': level === 5 ? 1.4 : 1,
+      }));
+    }
+
+    scores.forEach((score, i) => {
+      const [x, y] = at(i, 5);
+      svg.append(el('line', { x1: cx, y1: cy, x2: x, y2: y, stroke: '#e3edf7', 'stroke-width': 1 }));
+      const cos = Math.cos(angle(i));
+      const lx = cx + (R + 22) * cos;
+      const ly = cy + (R + 22) * Math.sin(angle(i));
+      const label = el('text', {
+        x: lx, y: ly, 'font-size': '11.5', fill: '#5f7d99',
+        'text-anchor': cos > 0.3 ? 'start' : cos < -0.3 ? 'end' : 'middle',
+        'dominant-baseline': 'middle',
+      });
+      label.textContent = score.label;
+      svg.append(label);
+    });
+
+    const polygon = (values, attrs) => el('polygon', Object.assign(
+      { points: values.map((value, i) => at(i, value).join(',')).join(' ') }, attrs));
+
+    if (reference) {
+      svg.append(polygon(scores.map(score => reference[score.id]), {
+        fill: 'none', stroke: '#17324a', 'stroke-width': 1.4,
+        'stroke-dasharray': '5 4', 'stroke-opacity': '.55',
+      }));
+    }
+
+    const own = scores.map(midScore);
+    svg.append(polygon(own, {
+      fill: 'url(#radar-fill)', stroke: '#1f6fb6', 'stroke-width': 2.2, 'stroke-linejoin': 'round',
+    }));
+    own.forEach((value, i) => {
+      const [x, y] = at(i, value);
+      svg.append(el('circle', { cx: x, cy: y, r: 3.2, fill: '#fff', stroke: '#1f6fb6', 'stroke-width': 2 }));
+    });
+
+    host.replaceChildren(svg);
+
+    const item = (color, text, dashed) => {
+      const wrap = make('span');
+      const dot = make('span', undefined, 'legend-dot');
+      if (dashed) dot.style.border = `1.5px dashed ${color}`;
+      else dot.style.background = color;
+      wrap.append(dot, make('span', text));
+      return wrap;
+    };
+    legend.replaceChildren(item('#1f6fb6', '你的得分'));
+    if (reference) legend.append(item('#17324a', '类型均值', true));
+  }
+
   function renderMatch(result) {
     return result.probabilities.map(item => {
       const type = model.types.find(record => record.id === item.id);
       const row = make('div', undefined, 'match-row');
       const line = make('p');
-      line.append(make('strong', type.name), make('span', displayRange(item.min, item.max, percent)));
+      line.append(make('strong', type.name));
+      if (item.id === result.topType) line.append(make('span', '最接近', 'match-badge'));
+      line.append(make('span', displayRange(item.min, item.max, percent)));
       const meter = make('div', undefined, 'match-meter');
       meter.setAttribute('aria-hidden', 'true');
       meter.style.setProperty('--tint', type.color);
@@ -790,29 +992,41 @@ window.QuizFeedback = {
   function renderScoreComparison(result, type, content, example) {
     const reference = type && model.profileMeans(type.id);
     get('personal-title').textContent = reference ? '作答得分与类型参考' : '本次作答的代表性得分';
-    get('personal-score-label').textContent = example ? '示例得分' : '你的得分';
-    get('reference-label').hidden = !reference;
     get('personal-note').textContent = reference
-      ? '下表选取几个能说明这类特点的维度，计分范围为1–5。类型匹配依据全部十个维度的得分组合。'
+      ? '选取几个能说明这类特点的维度，计分范围为1–5，柱条上的深色刻度是类型均值。类型匹配依据全部十个维度的得分组合。'
       : '计分范围为1–5。你也可以在页面下方查看全部十项得分。';
     const scores = new Map(result.scores.map(score => [score.id, score]));
-    get('personal-scores').replaceChildren(...content.dimensions.map(id => {
+    const caption = make('div', undefined, 'score-caption');
+    caption.append(make('span', example ? '示例维度' : '维度'), make('span', '1 – 5 分'),
+      make('span', example ? '示例' : '你的'), make('span', reference ? '均值' : ''));    const rows = content.dimensions.map(id => {
       const score = scores.get(id);
-      const row = make('tr');
-      const label = make('th', score.label);
-      label.scope = 'row';
-      row.append(label, make('td', scoreText(score), 'own-score'));
-      if (reference) row.append(make('td', reference[id].toFixed(2)));
+      const mid = midScore(score);
+      const row = make('div', undefined, 'score-row');
+      const track = make('div', undefined, 'score-track');
+      const fill = make('div', undefined, 'score-fill');
+      fill.style.width = `${(mid - 1) / 4 * 100}%`;
+      track.append(fill);
+      if (reference) {
+        const mark = make('span', undefined, 'score-ref');
+        mark.style.left = `${(reference[id] - 1) / 4 * 100}%`;
+        track.append(mark);
+      }
+      row.append(make('span', score.label, 'score-name'), track,
+        make('span', scoreText(score), 'score-value'),
+        make('span', reference ? reference[id].toFixed(2) : '', 'score-ref-value'));
       return row;
-    }));
+    });
+    get('personal-scores').replaceChildren(caption, ...rows);
   }
 
   function renderPlan(plan) {
-    get('advice-list').replaceChildren(...plan.map(item => {
+    get('advice-list').replaceChildren(...plan.map((item, index) => {
       const entry = make('li', undefined, 'plan-card');
+      const head = make('div', undefined, 'plan-head');
+      head.append(make('span', String(index + 1), 'plan-step'), make('p', item.when, 'plan-time'));
       const steps = make('ol', undefined, 'plan-steps');
       steps.append(...item.steps.map(step => make('li', step)));
-      entry.append(make('p', item.when, 'plan-time'), make('h3', item.title), steps);
+      entry.append(head, make('h3', item.title), steps);
       if (item.example) entry.append(make('p', item.example, 'plan-example'));
       return entry;
     }));
@@ -838,9 +1052,15 @@ window.QuizFeedback = {
     const example = Boolean(sampleType);
     sampleOpen = example;
     get('result-kicker').textContent = example ? '示例结果 · 演示作答' : '你的试填结果';
-    get('result-title').textContent = type
-      ? `${example ? '示例作答' : '你这次的作答'}最接近「${type.name}」`
-      : '本次作答接近多个类型';
+    const titleNode = get('result-title');
+    titleNode.replaceChildren();
+    if (type) {
+      titleNode.append(
+        make('span', '最接近的类型', 'result-prefix'),
+        make('span', `「${type.name}」`, 'result-type'));
+    } else {
+      titleNode.textContent = '本次作答接近多个类型';
+    }
     get('result-takeaway').textContent = content.takeaway;
     get('result-caution').hidden = !result.cautious;
     get('result-caution').textContent = '这次的匹配程度偏弱，请把类型和下方建议作为参考。';
@@ -849,14 +1069,21 @@ window.QuizFeedback = {
     get('profile-features').hidden = content.features.length === 0;
     get('profile-features').replaceChildren(...content.features.map(feature => make('li', feature)));
     renderScoreComparison(result, type, content, example);
+    renderRadar(result.scores, type ? model.profileMeans(type.id) : null);
+    renderGauge(result);
     renderPlan(content.plan);
     renderSampleTypes(sampleType);
     get('matches').replaceChildren(...renderMatch(result));
-    get('match-note').textContent = '匹配程度按暂定的33题计分。类型和整理建议用于试用与自我反思。';
+    get('match-note').textContent = '匹配程度按暂定的33题计分。类型和改善建议用于试用与自我反思。';
     get('dimension-scores').replaceChildren(...result.scores.map(score => {
-      const line = make('p');
-      line.append(make('span', score.label), make('strong', scoreText(score)));
-      return line;
+      const row = make('div', undefined, 'dim-bar');
+      const track = make('div', undefined, 'dim-track');
+      const fill = make('div', undefined, 'dim-fill');
+      fill.style.width = `${(midScore(score) - 1) / 4 * 100}%`;
+      track.append(fill);
+      row.append(make('span', score.label, 'dim-name'), track,
+        make('span', scoreText(score), 'dim-value'));
+      return row;
     }));
     for (const disclosure of get('result').querySelectorAll('details')) disclosure.open = false;
     get('edit').hidden = example;
