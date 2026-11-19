@@ -154,7 +154,14 @@ progress::-moz-progress-bar { background: var(--blue); }
 .gauge-inner { width: 128px; height: 128px; border-radius: 50%; background: linear-gradient(160deg, #0a2947, #124064); display: grid; place-content: center; text-align: center; gap: 3px; }
 .gauge-value { font-size: 29px; font-weight: 760; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
 .gauge-label { font-size: 11px; letter-spacing: .08em; color: rgba(204,229,250,.82); }
-.gauge-range { font-size: 11.5px; color: rgba(204,229,250,.7); }
+.gauge-list { display: grid; gap: 7px; width: 100%; margin-top: 2px; }
+.gauge-item { display: grid; grid-template-columns: 9px minmax(0, 1fr) auto; gap: 8px; align-items: center; font-size: 12px; color: rgba(214,234,252,.78); }
+.gauge-item i { width: 9px; height: 9px; border-radius: 3px; display: block; }
+.gauge-item b { font-weight: 650; font-variant-numeric: tabular-nums; color: rgba(226,241,255,.92); }
+.gauge-item.is-top { color: #fff; }
+.gauge-item.is-top b { color: #fff; font-weight: 760; }
+.profile-data { margin-top: 14px; padding: 10px 13px; border-radius: 10px; background: #f3f9ff; border: 1px dashed #cfe2f2; color: #33506a; font-size: 13px; line-height: 1.75; }
+.plan-basis { display: inline-block; margin: 8px 0 2px; padding: 3px 9px; border-radius: 999px; background: #eef6fe; color: #2c6f9f; font-size: 11.5px; }
 
 .section-index { font-size: 11px; letter-spacing: .14em; color: #5d89b2; font-weight: 700; margin-bottom: 5px; }
 .result-grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(300px, .92fr); gap: 18px; margin: 20px 0; }
@@ -352,6 +359,7 @@ progress::-moz-progress-bar { background: var(--blue); }
           <p class="section-index">01 · 剖面解读</p>
           <h2 id="profile-title">这个类型有什么特点</h2>
           <p id="result-description" class="result-description"></p>
+          <p id="profile-data" class="profile-data"></p>
           <ul id="profile-features" class="profile-features"></ul>
         </section>
         <section class="result-card radar-card" aria-labelledby="radar-title">
@@ -774,6 +782,191 @@ window.QuizFeedback = {
 (() => {
   const model = window.QuizModel;
   const feedback = window.QuizFeedback;
+
+  // 维度 → 建议。high 指该维度得分偏高时该做什么，low 指偏低时该做什么。
+  const DIMENSION_ADVICE = {
+    a: {
+      high: {
+        title: '先给“再存一份”加一道三秒门槛',
+        steps: [
+          '把“下载/收藏”改成“先加入待读清单”，48 小时没打开就清掉。',
+          '每周固定一次处理清单，晚到不补，避免堆积。',
+          '数字和实物一起管：先清一个抽屉，再清一个文件夹。',
+        ],
+      },
+      low: {
+        title: '把现成的条理性用在检索上',
+        steps: [
+          '下载前写一句用途，写不出来就不存。',
+          '每周留一次“只看不存”的浏览时间。',
+          '把精力放到回看已有资料上，一周至少真正用掉 3 份。',
+        ],
+      },
+    },
+    b: {
+      high: {
+        title: '先解决“删了会不安”，再谈减量',
+        steps: [
+          '删之前确认云端和本地都有备份，把删除理解为“换个地方放”。',
+          '用“移入归档、30 天后再清”代替直接删除。',
+          '留一份 20 条以内的“核心清单”，其余不放进核心区。',
+        ],
+      },
+      low: {
+        title: '你删得下去，重点在选得准',
+        steps: [
+          '每季度清一次重复下载的同名版本。',
+          '把“留不留”的判断写成一句标准，例如“近三个月用过”。',
+          '对免费但质量一般的资源保持克制，不因为免费就存。',
+        ],
+      },
+    },
+    c: {
+      high: {
+        title: '按任务建桶，任务结束就收口',
+        steps: [
+          '每门课、每个项目单独一个文件夹，命名“课程_任务_截止日期”。',
+          '交付后一周内，把过程资料移进“项目归档”，只留结论和引用。',
+          '接新任务前先搜一遍已有资料，避免重复收集。',
+        ],
+      },
+      low: {
+        title: '在任务开始前主动建档',
+        steps: [
+          '接到任务先建“输入/加工/输出”三个文件夹。',
+          '每周固定 15 分钟把散落文件归位。',
+          '借每次交付做一次小清理，别等攒成大工程。',
+        ],
+      },
+    },
+    d: {
+      high: {
+        title: '把“先存着”换成一个判断',
+        steps: [
+          '保存前回答一句“它解决哪个问题”，答不上来就不存。',
+          '对“看起来很有用”的资料，先看摘要再决定要不要全文。',
+          '每月抽查 5 份旧收藏，看当初的理由现在还成立吗。',
+        ],
+      },
+      low: {
+        title: '存得少不是问题，用得上才是重点',
+        steps: [
+          '一次只处理一个来源，读完再决定是否保存。',
+          '把“读”放在“存”前面：先读完能用的部分，再留链接。',
+          '每月挑一份旧资料，真正用进作业或汇报里。',
+        ],
+      },
+    },
+    e: {
+      high: {
+        title: '少跟别人比库存，多跟自己比使用',
+        steps: [
+          '取关或退订 3 个持续制造“怕错过”的信息源。',
+          '自我评价换成“本月用掉几份”，而不是“本月存了几份”。',
+          '同学分享的资料先放“待筛”，一周内决定去留。',
+        ],
+      },
+      low: {
+        title: '保持自己的节奏就好',
+        steps: [
+          '不主动扩大信息源，每学期最多新增一个稳定来源。',
+          '定期回顾已经用上的资料，强化“够用”的感觉。',
+          '把注意力放在深度阅读，而不是收集数量。',
+        ],
+      },
+    },
+    f: {
+      high: {
+        title: '别默认“存下来的都可靠”',
+        steps: [
+          '对要引用的资料核对作者、年份、出处三样。',
+          '同一主题只保留一个权威版本，其余标成“参考”。',
+          '把免费资源的适用范围写进备注，避免误用。',
+        ],
+      },
+      low: {
+        title: '先给自己定一条最低质量线',
+        steps: [
+          '入库前看三样：作者是谁、发表于哪里、有没有数据。',
+          '不达标但还想留的，单独放“待核”文件夹。',
+          '每月清一次“待核”，两周没核实的就删掉。',
+        ],
+      },
+    },
+    g: {
+      high: {
+        title: '给便利加一点摩擦',
+        steps: [
+          '关掉网盘的“全盘自动同步”，改成手动选择。',
+          '给存储设一个余量提醒，接近上限时先清理再加。',
+          '同一份资料只留一个主位置，其他设备只放链接。',
+        ],
+      },
+      low: {
+        title: '把工具用起来，而不是靠手动',
+        steps: [
+          '选一个主存储（网盘或本地），其余只做备份。',
+          '用固定的文件夹规则代替记忆，减少“忘了存在哪”。',
+          '跨设备需要时用链接分享，不再重复下载。',
+        ],
+      },
+    },
+    h: {
+      high: {
+        title: '把现在的做法沉淀成模板',
+        steps: [
+          '把命名规则写成一行，贴在文件夹说明里。',
+          '整理一份“该删/该留”的判断清单，下次直接照做。',
+          '把方法讲给同组同学，用他们的反馈检验好不好用。',
+        ],
+      },
+      low: {
+        title: '先练三个最小动作：命名、分类、剔除',
+        steps: [
+          '文件名统一“主题_用途_日期”，不再用“新建文件夹”。',
+          '目录最多三层，超过就拆成子目录。',
+          '每周删掉一批“确定不会再用”的文件，哪怕只有 5 个。',
+        ],
+      },
+    },
+    i: {
+      high: {
+        title: '把信心转成产出',
+        steps: [
+          '挑一条已有收藏，本周写出一段能用的文字。',
+          '给自己定“读完即记一条”的小目标。',
+          '记录一次“用旧资料解决新问题”的经历，当作正反馈。',
+        ],
+      },
+      low: {
+        title: '先做一次最小的“用上”',
+        steps: [
+          '只挑 1 份资料，10 分钟内读完并写 3 行笔记。',
+          '把笔记直接贴进正在写的作业或汇报里。',
+          '记下这次用了多久，用事实替代“我没时间”的担心。',
+        ],
+      },
+    },
+    j: {
+      high: {
+        title: '先盘点，再减量',
+        steps: [
+          '数一个常用目录的文件数，把数字写下来。',
+          '按“近三个月用过/没用过”分两堆，没用过的移入归档。',
+          '执行“一进一出”：新增 10 份，就清掉 10 份。',
+        ],
+      },
+      low: {
+        title: '数量控制得不错，重点在可检索',
+        steps: [
+          '把命名和目录结构固定下来，不要每次重建。',
+          '每月做一次“能不能 1 分钟找到”的测试。',
+          '保持现在的保存量，把省下的时间用在读和写。',
+        ],
+      },
+    },
+  };
+  const PROBLEM_DIMS = ['a', 'b', 'd', 'e', 'f', 'g', 'j'];
   const get = id => document.getElementById(id);
   const screens = ['intro', 'survey', 'result'];
   const itemsPerPage = 7;
@@ -861,11 +1054,21 @@ window.QuizFeedback = {
     return (score.min + score.max) / 2;
   }
 
+  // 原始后验概率常出现 0/1 饱和，这里做温和软化，只用于并列展示三类的相对接近程度。
+  function softenShares(probabilities) {
+    const raw = probabilities.map(item => Math.pow(Math.max((item.min + item.max) / 2, 0.0001), 0.25));
+    const total = raw.reduce((sum, value) => sum + value, 0) || 1;
+    return probabilities
+      .map((item, index) => ({ ...item, share: raw[index] / total }))
+      .sort((a, b) => b.share - a.share);
+  }
+
   function renderGauge(result) {
     const host = get('hero-gauge');
     if (!host) return;
-    const top = result.probabilities.slice().sort((a, b) => (b.min + b.max) - (a.min + a.max))[0];
     const hero = get('result').querySelector('.result-hero');
+    const shares = result.probabilities.length ? softenShares(result.probabilities) : [];
+    const top = shares[0];
     if (!top) {
       host.hidden = true;
       host.replaceChildren();
@@ -875,14 +1078,89 @@ window.QuizFeedback = {
     host.hidden = false;
     if (hero) hero.classList.remove('no-gauge');
     const type = model.types.find(record => record.id === top.id);
-    const mid = (top.min + top.max) / 2;
     const ring = make('div', undefined, 'gauge-ring');
-    ring.style.setProperty('--angle', `${Math.round(mid * 360)}deg`);
+    ring.style.setProperty('--angle', `${Math.round(top.share * 360)}deg`);
     ring.style.setProperty('--tint', type ? type.color : '#7cc6ff');
     const inner = make('div', undefined, 'gauge-inner');
-    inner.append(make('span', percent(mid), 'gauge-value'), make('span', '类型匹配度', 'gauge-label'));
+    inner.append(make('span', percent(top.share), 'gauge-value'), make('span', '最接近的类型', 'gauge-label'));
     ring.append(inner);
-    host.replaceChildren(ring, make('p', `匹配区间 ${displayRange(top.min, top.max, percent)}`, 'gauge-range'));
+    const list = make('div', undefined, 'gauge-list');
+    shares.forEach(item => {
+      const record = model.types.find(entry => entry.id === item.id);
+      const row = make('div', '', item.id === top.id ? 'gauge-item is-top' : 'gauge-item');
+      const dot = make('i');
+      dot.style.background = record ? record.color : '#7cc6ff';
+      row.append(dot, make('span', record ? record.name : item.id), make('b', percent(item.share)));
+      list.append(row);
+    });
+    host.replaceChildren(ring, list);
+  }
+
+  function renderProfileData(result, type) {
+    const host = get('profile-data');
+    if (!host) return;
+    const scored = result.scores.map(score => ({ ...score, mid: midScore(score) })).sort((a, b) => b.mid - a.mid);
+    const high = scored[0];
+    const low = scored[scored.length - 1];
+    let text = `你的十维里，${high.label} 最高（${high.mid.toFixed(2)} 分），${low.label} 最低（${low.mid.toFixed(2)} 分）。`;
+    const reference = type && model.profileMeans(type.id);
+    if (reference) {
+      const gaps = scored
+        .map(score => ({ label: score.label, gap: score.mid - reference[score.id] }))
+        .sort((a, b) => b.gap - a.gap);
+      const parts = [];
+      if (gaps[0].gap > 0.05) parts.push(`${gaps[0].label} 高出均值 ${gaps[0].gap.toFixed(2)} 分`);
+      if (gaps[gaps.length - 1].gap < -0.05) {
+        parts.push(`${gaps[gaps.length - 1].label} 低于均值 ${Math.abs(gaps[gaps.length - 1].gap).toFixed(2)} 分`);
+      }
+      if (parts.length) text += `和「${type.name}」的均值比，${parts.join('，')}。`;
+    }
+    host.textContent = text;
+  }
+
+  // 按维度得分挑出最需要动的两项，再补一条复查指标，生成针对本次作答的计划。
+  function buildPersonalPlan(result) {
+    const scored = result.scores.map(score => ({ ...score, mid: midScore(score) }));
+    const ranked = scored
+      .map(score => ({ ...score, weight: PROBLEM_DIMS.includes(score.id) ? score.mid - 3 : 3 - score.mid }))
+      .sort((a, b) => b.weight - a.weight);
+    const picks = [];
+    for (const item of ranked) {
+      if (picks.length === 2) break;
+      if (item.weight <= 0.15 && picks.length) break;
+      picks.push(item);
+    }
+    if (!picks.length) return null;
+    if (picks.length === 1) {
+      const extra = ranked.find(item => item !== picks[0]);
+      if (extra) picks.push(extra);
+    }
+    const levelText = item => (item.mid >= 4 ? '明显偏高' : item.mid >= 3.3 ? '略偏高'
+      : item.mid <= 2.6 ? '明显偏低' : item.mid <= 2.9 ? '略偏低' : '居中');
+    const cards = picks.map((item, index) => {
+      const advice = DIMENSION_ADVICE[item.id][item.mid >= 3 ? 'high' : 'low'];
+      return {
+        when: index === 0 ? '今天 · 10分钟' : '本周找一次 · 15分钟',
+        title: advice.title,
+        steps: advice.steps,
+        basis: `依据：${item.label} ${item.mid.toFixed(2)} 分（十维中${levelText(item)}${index === 0 ? '，本次优先级最高' : ''}）`,
+      };
+    });
+    const hoard = scored.find(score => score.id === 'j');
+    const efficacy = scored.find(score => score.id === 'i');
+    if (hoard && efficacy) {
+      cards.push({
+        when: '一周后 · 5分钟',
+        title: '用两个数字检查有没有真的变好',
+        steps: [
+          `再做一遍问卷，重点看囤积行为（现在 ${hoard.mid.toFixed(2)} 分）和自我效能（现在 ${efficacy.mid.toFixed(2)} 分）。`,
+          '囤积行为降了、自我效能没动：清理在推进，“用上”还没跟上，下周把时间放在读和写。',
+          '两个都动了：把这两周的做法写成三行流程，固定下来。',
+        ],
+        basis: '依据：本次十维得分',
+      });
+    }
+    return cards;
   }
 
   function renderRadar(scores, reference) {
@@ -969,26 +1247,19 @@ window.QuizFeedback = {
   }
 
   function renderMatch(result) {
-    return result.probabilities.map(item => {
+    return softenShares(result.probabilities).map(item => {
       const type = model.types.find(record => record.id === item.id);
       const row = make('div', undefined, 'match-row');
       const line = make('p');
       line.append(make('strong', type.name));
       if (item.id === result.topType) line.append(make('span', '最接近', 'match-badge'));
-      line.append(make('span', displayRange(item.min, item.max, percent)));
+      line.append(make('span', percent(item.share)));
       const meter = make('div', undefined, 'match-meter');
       meter.setAttribute('aria-hidden', 'true');
       meter.style.setProperty('--tint', type.color);
       const solid = make('span');
-      solid.style.width = `${item.min * 100}%`;
+      solid.style.width = `${item.share * 100}%`;
       meter.append(solid);
-      if (item.max > item.min) {
-        const interval = make('span');
-        interval.style.left = `${item.min * 100}%`;
-        interval.style.width = `${(item.max - item.min) * 100}%`;
-        interval.classList.add('match-interval');
-        meter.append(interval);
-      }
       row.append(line, meter);
       return row;
     });
@@ -1035,7 +1306,9 @@ window.QuizFeedback = {
       head.append(make('span', String(index + 1), 'plan-step'), make('p', item.when, 'plan-time'));
       const steps = make('ol', undefined, 'plan-steps');
       steps.append(...item.steps.map(step => make('li', step)));
-      entry.append(head, make('h3', item.title), steps);
+      entry.append(head, make('h3', item.title));
+      if (item.basis) entry.append(make('p', item.basis, 'plan-basis'));
+      entry.append(steps);
       if (item.example) entry.append(make('p', item.example, 'plan-example'));
       return entry;
     }));
@@ -1077,13 +1350,14 @@ window.QuizFeedback = {
     get('result-description').textContent = content.meaning;
     get('profile-features').hidden = content.features.length === 0;
     get('profile-features').replaceChildren(...content.features.map(feature => make('li', feature)));
+    renderProfileData(result, type);
     renderScoreComparison(result, type, content, example);
     renderRadar(result.scores, type ? model.profileMeans(type.id) : null);
     renderGauge(result);
-    renderPlan(content.plan);
+    renderPlan(buildPersonalPlan(result) || content.plan);
     renderSampleTypes(sampleType);
     get('matches').replaceChildren(...renderMatch(result));
-    get('match-note').textContent = '匹配程度按暂定的33题计分。类型和改善建议用于试用与自我反思。';
+    get('match-note').textContent = '三类匹配度按作答剖面与类型均值的接近程度换算，并做了软化处理，三项相加为 100%，用于比较相对接近程度，不作概率判断。';
     get('dimension-scores').replaceChildren(...result.scores.map(score => {
       const row = make('div', undefined, 'dim-bar');
       const track = make('div', undefined, 'dim-track');
