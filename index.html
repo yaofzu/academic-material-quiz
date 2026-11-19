@@ -137,6 +137,7 @@ progress::-moz-progress-bar { background: var(--blue); }
 .results { padding: 34px 0 26px; }
 .result-hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 172px; gap: 30px; align-items: center; padding: 34px 36px; border-radius: 26px; color: #f2f9ff; overflow: hidden; background: radial-gradient(130% 130% at 100% 0%, rgba(122,198,255,.5) 0%, rgba(122,198,255,0) 54%), linear-gradient(135deg, #0c2f52 0%, #12466f 52%, #1a6492 100%); box-shadow: 0 26px 60px -40px rgba(9,40,70,.8); }
 .result-hero::after { content: ""; position: absolute; right: -70px; bottom: -130px; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.16), rgba(255,255,255,0) 70%); pointer-events: none; }
+.result-hero.no-gauge { grid-template-columns: minmax(0, 1fr); }
 .hero-copy { min-width: 0; }
 .result-hero .kicker { color: #9fd0ff; font-size: 12.5px; letter-spacing: .1em; margin-bottom: 4px; }
 .result-hero h1 { color: #fff; font-size: clamp(24px, 3.6vw, 38px); line-height: 1.28; letter-spacing: -.02em; margin-top: 4px; max-width: 20em; text-wrap: balance; }
@@ -864,7 +865,15 @@ window.QuizFeedback = {
     const host = get('hero-gauge');
     if (!host) return;
     const top = result.probabilities.slice().sort((a, b) => (b.min + b.max) - (a.min + a.max))[0];
-    if (!top) { host.replaceChildren(); return; }
+    const hero = get('result').querySelector('.result-hero');
+    if (!top) {
+      host.hidden = true;
+      host.replaceChildren();
+      if (hero) hero.classList.add('no-gauge');
+      return;
+    }
+    host.hidden = false;
+    if (hero) hero.classList.remove('no-gauge');
     const type = model.types.find(record => record.id === top.id);
     const mid = (top.min + top.max) / 2;
     const ring = make('div', undefined, 'gauge-ring');
